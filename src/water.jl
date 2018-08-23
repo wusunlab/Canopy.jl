@@ -172,13 +172,6 @@ julia> e_sat(298.15)  # 25 C
 
 julia> e_sat(273.15)  # 0 C
 610.3360999334138
-
-julia> e_sat.([0, 5, 15, 25] + 273.15)
-4-element Array{Float64,1}:
-  610.336
-  871.314
- 1703.28
- 3165.2
 ```
 """
 function e_sat(temp)
@@ -227,13 +220,6 @@ julia> e_sat_ice(258.15)  # -15 C
 
 julia> e_sat_ice(273.15)  # 0 C
 610.2072697609788
-
-julia> e_sat_ice.([0, -5, -15, -25] + 273.15)
-4-element Array{Float64,1}:
- 610.207
- 401.121
- 165.015
-  63.17
 ```
 """
 function e_sat_ice(temp)
