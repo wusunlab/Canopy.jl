@@ -1,4 +1,4 @@
-.PHONY: install uninstall docs
+.PHONY: install uninstall test docs
 
 install:
 	make uninstall
@@ -6,6 +6,9 @@ install:
 
 uninstall:
 	-julia -e 'using Pkg; Pkg.rm("Canopy")'
+
+test:
+	-julia test/runtests.jl
 
 docs:
 	cd docs; \

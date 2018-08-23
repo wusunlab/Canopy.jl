@@ -7,6 +7,7 @@ anyerrors = false
 tests = [
     "test_constants.jl",
     "test_water.jl",
+    "test_radtrans.jl",
 ]
 
 println("Running tests:")
