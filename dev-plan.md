@@ -8,8 +8,8 @@ A laundry list of things to implement before version 1.0.
 - [2. Water and water vapor properties (`Canopy.Water`)](#2-water-and-water-vapor-properties-canopywater)
 - [3. Dry and moist air properties (`Canopy.Air`)](#3-dry-and-moist-air-properties-canopyair)
 - [4. Physical chemistry](#4-physical-chemistry)
-    - [4.1. Gas solubility](#41-gas-solubility)
-    - [4.2. Temperature dependence of reactions](#42-temperature-dependence-of-reactions)
+    - [4.1 Gas solubility](#41-gas-solubility)
+    - [4.2 Temperature dependence of reactions](#42-temperature-dependence-of-reactions)
 - [5. Radiative transfer (`Canopy.RadTrans`)](#5-radiative-transfer-canopyradtrans)
     - [5.1 Blackbody radiation](#51-blackbody-radiation)
     - [5.2 Solar radiation and position](#52-solar-radiation-and-position)
@@ -52,9 +52,9 @@ A laundry list of things to implement before version 1.0.
 
 ## 4. Physical chemistry
 
-### 4.1. Gas solubility
+### 4.1 Gas solubility
 
-### 4.2. Temperature dependence of reactions
+### 4.2 Temperature dependence of reactions
 
 ## 5. Radiative transfer (`Canopy.RadTrans`)
 
@@ -68,6 +68,12 @@ A laundry list of things to implement before version 1.0.
 - [X] `blackbody_temp`: Calculate blackbody temperature. [2018-08-23]
 
 ### 5.2 Solar radiation and position
+
+- [X] `eccentricity`: Calculate the eccentricity of the earth's orbit.
+  [2018-09-20]
+- [X] `solar_angle`: Calculate the solar position. [2018-09-20]
+- [X] `atmospheric_refraction`: Calculate atmospheric refraction effect on
+  solar zenith angle. [2018-09-20]
 
 ### 5.3 Canopy 1-D radiative transfer
 
