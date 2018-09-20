@@ -12,6 +12,7 @@ makedocs(
             "lib/air.md",
             "lib/water.md",
             "lib/radtrans.md",
+            "lib/physchem.md",
         ]
     ]
 )

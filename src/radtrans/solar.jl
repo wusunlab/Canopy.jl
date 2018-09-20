@@ -112,7 +112,7 @@ Calculate solar angles and sunrise/sunset times.
 
 The original program was created by NOAA Global Radiation Group
 <http://www.esrl.noaa.gov/gmd/grad/solcalc/calcdetails.html>. Ported to Julia
-by Wu Sun <wu.sun@ucla.edu> on 2017-09-24.
+by Wu Sun on 2017-09-24.
 
 # Parameters
 

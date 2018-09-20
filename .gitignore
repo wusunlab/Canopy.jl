@@ -44,3 +44,8 @@ deps/deps.jl
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+
+# Project specific
+# ================
+/docs/build

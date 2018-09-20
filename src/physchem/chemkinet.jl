@@ -60,9 +60,9 @@ A helper function to calculate the enzyme reaction rate at a given temperature
 (`temp`) in an *arbitrary unit*.
 
 ```math
-f(T) = \\frac{\\exp\\left(-\\frac{\\Delta G_\\mathrm{a}}{R T}\\right)}{
+f(T) = \\dfrac{\\exp\\left(-\\dfrac{\\Delta G_\\mathrm{a}}{R T}\\right)}{
     1 + \\exp\\left(
-        -\\frac{\\Delta H_\\mathrm{d} - T\\Delta S_\\mathrm{d}}{RT}\\right)}
+        -\\dfrac{\\Delta H_\\mathrm{d} - T\\Delta S_\\mathrm{d}}{RT}\\right)}
 ```
 
 # Arguments
@@ -90,10 +90,10 @@ a reference temperature (`ref`) for an enzyme reaction with a temperature
 optimum.
 
 ```math
-\\frac{V_\\mathrm{max}(T)}{V_\\mathrm{max}(T_\\mathrm{ref})} =
-\\frac{f(T)}{f(T_\\mathrm{ref})} \\text{, where}\\quad f(T) =
-\\frac{\\exp\\left(-\\frac{\\Delta G_\\mathrm{a}}{RT}\\right)}{1 + \\exp\\left(
--\\frac{\\Delta H_\\mathrm{d} - T\\Delta S_\\mathrm{d}}{RT}\\right)}
+\\dfrac{V_\\mathrm{max}(T)}{V_\\mathrm{max}(T_\\mathrm{ref})} =
+\\dfrac{f(T)}{f(T_\\mathrm{ref})} \\text{, where}\\quad f(T) =
+\\dfrac{\\exp\\left(-\\dfrac{\\Delta G_\\mathrm{a}}{RT}\\right)}{1 + \\exp
+\\left(-\\dfrac{\\Delta H_\\mathrm{d} - T\\Delta S_\\mathrm{d}}{RT}\\right)}
 ```
 
 # Arguments
