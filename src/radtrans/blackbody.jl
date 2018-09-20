@@ -9,6 +9,8 @@ Blackbody radiation.
 """
 module Blackbody
 
+include("../docstring_style.jl")
+
 using Canopy.Constants: c, h, N_A, c_1L, c_2, sigma_SB
 
 export ephoton,

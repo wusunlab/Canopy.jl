@@ -1,7 +1,10 @@
 module RadTrans
 
 include("blackbody.jl")
+include("solar.jl")
 
-using .Blackbody  # export submodule functions to the current level
+# export submodule functions to the current level
+using .Blackbody
+using .Solar
 
 end  # module

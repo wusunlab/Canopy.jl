@@ -1,5 +1,4 @@
 using Test
-using Compat
 using Canopy
 
 anyerrors = false
@@ -24,5 +23,5 @@ for t in tests
 end
 
 if anyerrors
-    throw(error("Tests failed"))
+    error("Tests failed")
 end

@@ -1,8 +1,9 @@
 module TestRadTrans
 
 using Test
+using Dates: DateTime
 using Canopy.RadTrans.Blackbody
-
+using Canopy.RadTrans.Solar
 
 @time @testset "Canopy.RadTrans.Blackbody" begin
     @test isapprox(ephoton(450e-9), 4.414e-19, rtol=1e-3)  # blue
@@ -20,5 +21,13 @@ using Canopy.RadTrans.Blackbody
     @test isapprox(blackbody_temp(149.6), 226.6, rtol=1e-3)  # venus
 end
 
+@time @testset "Canopy.RadTrans.Solar" begin
+    @test isapprox(eccentricity(-1), 0.01712, rtol=1e-3)  # 1000 AD
+    @test isapprox(eccentricity(DateTime(1000)), eccentricity(-1), rtol=1e-6)
+    @test isapprox(eccentricity(1), 0.01627, rtol=1e-3)  # 3000 AD
+    @test isapprox(eccentricity(DateTime(3000)), eccentricity(1), rtol=1e-6)
+
+    # TODO:
+end
 
 end  # module
