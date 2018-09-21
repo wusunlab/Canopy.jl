@@ -8,8 +8,9 @@ A laundry list of things to implement before version 1.0.
 - [2. Water and water vapor properties (`Canopy.Water`)](#2-water-and-water-vapor-properties-canopywater)
 - [3. Dry and moist air properties (`Canopy.Air`)](#3-dry-and-moist-air-properties-canopyair)
 - [4. Physical chemistry](#4-physical-chemistry)
-    - [4.1 Gas solubility](#41-gas-solubility)
-    - [4.2 Chemical kinetics](#42-chemical-kinetics)
+    - [4.1 Chemical kinetics](#41-chemical-kinetics)
+    - [4.2 Gas solubility](#42-gas-solubility)
+    - [4.3 Reactions](#43-reactions)
 - [5. Radiative transfer (`Canopy.RadTrans`)](#5-radiative-transfer-canopyradtrans)
     - [5.1 Blackbody radiation](#51-blackbody-radiation)
     - [5.2 Solar radiation and position](#52-solar-radiation-and-position)
@@ -17,6 +18,10 @@ A laundry list of things to implement before version 1.0.
 - [6. Heat and mass transfer](#6-heat-and-mass-transfer)
 - [7. Water transport](#7-water-transport)
 - [8. Leaf and canopy processes](#8-leaf-and-canopy-processes)
+    - [8.1 Leaf energy balance](#81-leaf-energy-balance)
+    - [8.2 Photosynthesis](#82-photosynthesis)
+    - [8.3 Stomatal conductance](#83-stomatal-conductance)
+    - [8.4 Leaf and xylem water potential](#84-leaf-and-xylem-water-potential)
 - [9. Soil processes](#9-soil-processes)
 
 <!-- /TOC -->
@@ -52,9 +57,7 @@ A laundry list of things to implement before version 1.0.
 
 ## 4. Physical chemistry
 
-### 4.1 Gas solubility
-
-### 4.2 Chemical kinetics
+### 4.1 Chemical kinetics
 
 - [X] `arrhenius`: Arrhenius equation for temperature dependence. [2018-09-20]
 - [X] `q10_func`: Q<sub>10</sub> (exponential) type equation for temperature
@@ -63,6 +66,18 @@ A laundry list of things to implement before version 1.0.
   reaction. [2018-09-20]
 - [X] `enzyme_temperature_optimum`: Calculate the temperature optimum of an
   enzyme reaction. [2018-09-20]
+
+### 4.2 Gas solubility
+
+- [ ] `solub_gas`
+- [ ] `solub_co2`
+- [ ] `solub_cos`
+
+### 4.3 Reactions
+
+- [X] `hydrolysis_cos` [2018-09-20]
+
+(More to be added)
 
 ## 5. Radiative transfer (`Canopy.RadTrans`)
 
@@ -106,5 +121,24 @@ Transfer coefficients
 ## 7. Water transport
 
 ## 8. Leaf and canopy processes
+
+### 8.1 Leaf energy balance
+
+- [ ] `bl_cond_heat`
+- [ ] `bl_cond_vapor`
+- [ ] `PAR_to_shortwave`
+- [ ] `sensible_heat`
+- [ ] `leaf_vapor_pressure_deficit`
+- [ ] `transpiration`
+- [ ] `latent_heat`
+- [ ] `energy_imbalance`
+
+### 8.2 Photosynthesis
+
+### 8.3 Stomatal conductance
+
+### 8.4 Leaf and xylem water potential
+
+
 
 ## 9. Soil processes
