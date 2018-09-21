@@ -1,3 +1,8 @@
+"""
+Chemical reactions.
+
+* [`hydrolysis_cos`](@ref)
+"""
 module Rxn
 
 include("../docstring_style.jl")

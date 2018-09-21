@@ -23,6 +23,7 @@ A laundry list of things to implement before version 1.0.
     - [8.3 Stomatal conductance](#83-stomatal-conductance)
     - [8.4 Leaf and xylem water potential](#84-leaf-and-xylem-water-potential)
 - [9. Soil processes](#9-soil-processes)
+- [10. Units](#10-units)
 
 <!-- /TOC -->
 
@@ -70,8 +71,8 @@ A laundry list of things to implement before version 1.0.
 ### 4.2 Gas solubility
 
 - [ ] `solub_gas`
-- [ ] `solub_co2`
-- [ ] `solub_cos`
+- [X] `solub_co2`: CO2 solubility in fresh water or seawater. [2018-09-21]
+- [X] `solub_cos`: COS solubility in pure water. [2018-09-21]
 
 ### 4.3 Reactions
 
@@ -139,6 +140,9 @@ Transfer coefficients
 
 ### 8.4 Leaf and xylem water potential
 
-
-
 ## 9. Soil processes
+
+## 10. Units
+
+- [X] `c2k`: Convert Celsius to Kelvin.
+- [X] `k2c`: Convert Kelvin to Celsius.
