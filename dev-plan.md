@@ -154,5 +154,5 @@ A laundry list of things to implement before version 1.0.
 
 ## 10. Units
 
-- [X] `c2k`: Convert Celsius to Kelvin.
-- [X] `k2c`: Convert Kelvin to Celsius.
+- [X] `c2k`: Convert Celsius to Kelvin. [2018-09-21]
+- [X] `k2c`: Convert Kelvin to Celsius. [2018-09-21]

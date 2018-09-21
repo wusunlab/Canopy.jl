@@ -7,7 +7,7 @@ Wu Sun (wu.sun@ucla.edu)
 A Julia package that provides functions used in biometeorology and land
 biosphere--atmosphere interactions.
 
-**WARNING: Under construction! NO STABLE RELEASE YET.**
+**WARNING: Under construction! Feature not complete.**
 You may check the [Development Plan](./dev-plan.md) for the current progress.
 
 ## Features (in planning)
@@ -16,12 +16,12 @@ You may check the [Development Plan](./dev-plan.md) for the current progress.
 simulations of water, energy, and photosynthesis fluxes in forest and crop
 canopies. It will consist of modules of 1-D radiative transfer, leaf energy
 balance, stomatal conductance, photosynthesis, chlorophyll fluorescence, trace
-gas fluxes, and in-canopy eddy transport, et cetera.
+gas fluxes, and in-canopy eddy transport, etc.
 
 ## Dependencies
 
 * Julia >= 0.7
-* DocStringExtensions >= 0.4.5
+* DocStringExtensions
 
 ## Installation
 

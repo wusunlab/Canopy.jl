@@ -2,8 +2,8 @@
 Solar position and radiation functions.
 
 - [`eccentricity`](@ref)
-- [`solar_angle`](@ref)
 - [`atmospheric_refraction`](@ref)
+- [`solar_angle`](@ref)
 """
 module Solar
 

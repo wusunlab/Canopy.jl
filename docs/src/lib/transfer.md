@@ -9,5 +9,6 @@ end
 ## Mass transfer
 
 ```@autodocs
-Modules = [Canopy.RadTrans.Mass]
+Modules = [Canopy.Transfer.Mass]
+Private = false
 ```
