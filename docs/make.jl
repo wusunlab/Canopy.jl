@@ -9,10 +9,11 @@ makedocs(
         "Library" => Any[
             "lib.md",
             "lib/constants.md",
-            "lib/air.md",
             "lib/water.md",
-            "lib/radtrans.md",
+            "lib/air.md",
             "lib/physchem.md",
+            "lib/radtrans.md",
+            "lib/transfer.md",
         ]
     ]
 )

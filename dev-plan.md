@@ -15,7 +15,9 @@ A laundry list of things to implement before version 1.0.
     - [5.1 Blackbody radiation](#51-blackbody-radiation)
     - [5.2 Solar radiation and position](#52-solar-radiation-and-position)
     - [5.3 Canopy 1-D radiative transfer](#53-canopy-1-d-radiative-transfer)
-- [6. Heat and mass transfer](#6-heat-and-mass-transfer)
+- [6. Transfer coefficients (`Canopy.Transfer`)](#6-transfer-coefficients-canopytransfer)
+    - [6.1 Heat and momentum transfer](#61-heat-and-momentum-transfer)
+    - [6.2 Mass transfer](#62-mass-transfer)
 - [7. Water transport](#7-water-transport)
 - [8. Leaf and canopy processes](#8-leaf-and-canopy-processes)
     - [8.1 Leaf energy balance](#81-leaf-energy-balance)
@@ -101,9 +103,9 @@ A laundry list of things to implement before version 1.0.
 
 ### 5.3 Canopy 1-D radiative transfer
 
-## 6. Heat and mass transfer
+## 6. Transfer coefficients (`Canopy.Transfer`)
 
-Transfer coefficients
+### 6.1 Heat and momentum transfer
 
 - [ ] `dyn_visc_vapor`
 - [ ] `therm_cond_vapor`
@@ -118,6 +120,14 @@ Transfer coefficients
 - [ ] `heat_cap_mass_moistair`
 - [ ] `therm_diff_moistair`
 - [ ] `prandtl`
+
+### 6.2 Mass transfer
+
+- [X] `diffus_air`: Gas diffusivity in air. [2018-09-21]
+- [X] `diffus_water`: Gas diffusivity in water. [2018-09-21]
+- [X] `diffus_soil_air`: Gas diffusivity in soil air. [2018-09-21]
+- [X] `diffus_soil_water`: Gas diffusivity in soil water. [2018-09-21]
+- [X] `diffus_soil`: Dual-phase gas diffusivity in soil. [2018-09-21]
 
 ## 7. Water transport
 
