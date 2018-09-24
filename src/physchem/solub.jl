@@ -1,8 +1,8 @@
 """
 Gas solubility.
 
-- [`solub_co2`](@ref)
-- [`solub_cos`](@ref)
+* [`solub_co2`](@ref)
+* [`solub_cos`](@ref)
 """
 module Solub
 
@@ -24,10 +24,10 @@ coefficient defined via concentration and partial pressure [mol L^-1 atm^-1].
 
 # References
 
-- [MR71] Murray, C. N. and Riley, J. P. (1971). The solubility of gases
+* [MR71] Murray, C. N. and Riley, J. P. (1971). The solubility of gases
   in distilled water and seawater--IV. Carbon dioxide. *Deep-Sea Res.*, 18,
   533--541. <https://doi.org/10.1016/0011-7471(71)90077-5>.
-- [W74] Weiss, R. F. (1974). Carbon dioxide in water and seawater: the
+* [W74] Weiss, R. F. (1974). Carbon dioxide in water and seawater: the
   solubility of a non-ideal gas. *Mar. Chem.*, 2, 203--215.
   <https://doi.org/10.1016/0304-4203(74)90015-2>.
 
@@ -55,10 +55,10 @@ coefficient defined via concentration and partial pressure [mol L^-1 atm^-1].
 
 # References
 
-- [E89] Elliott, S., Lu, E., and Rowland, F. S. (1989). Rates and
+* [E89] Elliott, S., Lu, E., and Rowland, F. S. (1989). Rates and
   mechanisms for the hydrolysis of carbonyl sulfide in natural waters.
   *Environ. Sci. Tech*. 23(4), 458--461. <https://doi.org/10.1021/es00181a011>
-- [S15] Sun, W., Maseyk, K., Lett, C., and Seibt, U. (2015). A soil
+* [S15] Sun, W., Maseyk, K., Lett, C., and Seibt, U. (2015). A soil
   diffusion--reaction model for surface COS flux: COSSM v1, *Geosci. Model
   Dev.*, 8, 3055--3070. <https://doi.org/10.5194/gmd-8-3055-2015>
 

@@ -5,16 +5,16 @@ A collection of physical constants.
 
 ## 2014 CODATA recommended values:
 
-- [MNT16a] Mohr, P. J., Newell, D. B., and Taylor, B. N. (2016). CODATA
+* [MNT16a] Mohr, P. J., Newell, D. B., and Taylor, B. N. (2016). CODATA
   recommended values of the fundamental physical constants: 2014. *Rev. Mod.
   Phys.*, 88, 035009, 1--73. <https://doi.org/10.1103/RevModPhys.88.035009>.
-- [MNT16b] Mohr, P. J., Newell, D. B., and Taylor, B. N. (2016). CODATA
+* [MNT16b] Mohr, P. J., Newell, D. B., and Taylor, B. N. (2016). CODATA
   Recommended Values of the Fundamental Physical Constants: 2014. *J. Phys.
   Chem. Ref. Data*, 45, 043102, 1--74. <https://doi.org/10.1063/1.4954402>.
 
 ## Inorganics properties:
 
-- [CRC] Rumble, J. (eds.) (2017). *CRC Handbook of Chemistry and Physics, 98th
+* [CRC] Rumble, J. (eds.) (2017). *CRC Handbook of Chemistry and Physics, 98th
   Edition*. CRC Press, Boca Raton, FL, USA. ISBN: 9781498784542. Retrieved from
   <http://hbcponline.com/faces/contents/ContentsSearch.xhtml> on 2018-06-12.
 """

@@ -6,6 +6,7 @@ os:
 
 julia:
   - 0.7
+  - 1.0
   - nightly
 
 matrix:
@@ -16,7 +17,8 @@ notifications:
   email: false
 
 script:
-  - julia -e 'Pkg.clone(pwd()); Pkg.build("Canopy")'
+  # - julia -e 'Pkg.clone(pwd()); Pkg.build("Canopy")'
+  - julia -e 'using Pkg; Pkg.build()'
   - julia --check-bounds=yes -e 'Pkg.test("Canopy", coverage=true)'
 
 # push coverage results

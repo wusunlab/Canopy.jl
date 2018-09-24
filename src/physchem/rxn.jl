@@ -26,10 +26,10 @@ from temperature [K] and pH. Applicable range: temperature 5--30 C and pH
 
 # References
 
-- [E89] Elliott, S., Lu, E., and Rowland, F. S. (1989). Rates and
+* [E89] Elliott, S., Lu, E., and Rowland, F. S. (1989). Rates and
   mechanisms for the hydrolysis of carbonyl sulfide in natural waters.
   *Environ. Sci. Tech.*, 23(4), 458--461. <https://doi.org/10.1021/es00181a011>
-- [RC93] Radford-Knoery, J., and Cutter, G. A. (1993). Determination of
+* [RC93] Radford-Knoery, J., and Cutter, G. A. (1993). Determination of
   carbonyl sulfide and hydrogen sulfide species in natural waters using
   specialized collection procedures and gas chromatography with flame
   photometric detection. *Anal. Chem.*, 65(8), 976--982.

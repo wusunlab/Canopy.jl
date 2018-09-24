@@ -1,9 +1,9 @@
 """
 Solar position and radiation functions.
 
-- [`eccentricity`](@ref)
-- [`atmospheric_refraction`](@ref)
-- [`solar_angle`](@ref)
+* [`eccentricity`](@ref)
+* [`atmospheric_refraction`](@ref)
+* [`solar_angle`](@ref)
 """
 module Solar
 
@@ -34,7 +34,7 @@ Julian years from J2000.
 
 # References
 
-- [SBC94] Simon, J. L., Bretagnon, P., Chapront, J., Chapront-Touzé, M.,
+* [SBC94] Simon, J. L., Bretagnon, P., Chapront, J., Chapront-Touzé, M.,
   Francou, G., and Laskar, J. (1994). *Astron. Astrophys.*, 282, 663--683.
   Retrieved from <http://adsabs.harvard.edu/abs/1994A%26A...282..663S> on
   2018-06-12.
@@ -116,27 +116,27 @@ by Wu Sun on 2017-09-24.
 
 # Parameters
 
-- `dt`: `Dates.DateTime`.
-- `lat`: Latitude (-90 -- +90°).
-- `lon`: Longitude (-180 -- +180°).
-- `timezone` (*optional*): Time zone (-12 -- +12). Default is 0.
+* `dt`: `Dates.DateTime`.
+* `lat`: Latitude (-90 -- +90°).
+* `lon`: Longitude (-180 -- +180°).
+* `timezone` (*optional*): Time zone (-12 -- +12). Default is 0.
 
 # Returns
 
 `solar_angle_results::Dict` --- Unpack the keys to get the results.
 
-- "solar noon": Local solar noon, in fraction of a day.
-- "sunrise": Sunrise time, in fraction of a day.
-- "sunset": Sunset time, in fraction of a day.
-- "sunlight duration": Sunlight duration in fraction of a day.
-- "hour angle": Hour angle [deg].
-- "solar zenith angle": Solar zenith angle [deg].
-- "solar elevation angle": Solar elevation angle [deg].
-- "solar azimuth angle": Solar azimuth angle [deg].
-- "atmospheric refraction": Atmospheric refraction [deg].
-- "corrected solar zenith angle": Solar zenith angle corrected for
+* "solar noon": Local solar noon, in fraction of a day.
+* "sunrise": Sunrise time, in fraction of a day.
+* "sunset": Sunset time, in fraction of a day.
+* "sunlight duration": Sunlight duration in fraction of a day.
+* "hour angle": Hour angle [deg].
+* "solar zenith angle": Solar zenith angle [deg].
+* "solar elevation angle": Solar elevation angle [deg].
+* "solar azimuth angle": Solar azimuth angle [deg].
+* "atmospheric refraction": Atmospheric refraction [deg].
+* "corrected solar zenith angle": Solar zenith angle corrected for
   atmospheric refraction [deg].
-- "corrected solar elevation angle": solar elevation angle corrected
+* "corrected solar elevation angle": solar elevation angle corrected
   for atmospheric refraction [deg].
 
 # Examples

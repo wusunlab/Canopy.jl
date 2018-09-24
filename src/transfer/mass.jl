@@ -1,45 +1,45 @@
 """
 Mass transfer coefficients.
 
-- [`diffus_air`](@ref)
-- [`diffus_water`](@ref)
-- [`diffus_soil_air`](@ref)
-- [`diffus_soil_water`](@ref)
-- [`diffus_soil`](@ref)
+* [`diffus_air`](@ref)
+* [`diffus_water`](@ref)
+* [`diffus_soil_air`](@ref)
+* [`diffus_soil_water`](@ref)
+* [`diffus_soil`](@ref)
 
 # References
 
 ## Diffusivity in air
 
-- [M98] Massman, W. J. (1998). A review of the molecular diffusivities of
+* [M98] Massman, W. J. (1998). A review of the molecular diffusivities of
   H2O, CO2, CH4, CO, O3, SO2, NH3, N2O, NO, and NO2 in air, O2 and N2 near STP.
   *Atmos. Environ.*, 32(6), 1111--1127.
   <https://doi.org/10.1016/S1352-2310(97)00391-9>
-- [S10] Seibt, U. et al. (2010). A kinetic analysis of leaf uptake of COS
+* [S10] Seibt, U. et al. (2010). A kinetic analysis of leaf uptake of COS
   and its relation to transpiration, photosynthesis and carbon isotope
   fractionation. *Biogeosci.*, 7, 333--341.
   <https://doi.org/10.5194/bg-7-333-2010>
 
 ## Diffusivity in water
 
-- [J87] Jähne, B. et al. (1987). Measurement of the diffusion
+* [J87] Jähne, B. et al. (1987). Measurement of the diffusion
   coefficients of sparingly soluble gases in water. *J. Geophys. Res.*,
   92(C10), 10767--10776. <https://doi.org/10.1029/JC092iC10p10767>
-- [WH68] Wise, D. L. and Houghton, G. (1968). Diffusion coefficients of
+* [WH68] Wise, D. L. and Houghton, G. (1968). Diffusion coefficients of
   neon, krypton, xenon, carbon monoxide and nitric oxide in water at 10-6O C.
   *Chem. Eng. Sci.*, 23, 1211--1216.
   <https://doi.org/10.1016/0009-2509(68)89029-3>
-- [UFUA96] Ulshöfer, V. S., Flöck, O. R., Uher, G., and Andreae, M. O.
+* [UFUA96] Ulshöfer, V. S., Flöck, O. R., Uher, G., and Andreae, M. O.
   (1996). Photochemical production and air-sea exchange of sulfide in the
   eastern Mediterranean Sea. *Mar. Chem.*, 53, 25--39.
   <https://doi.org/10.1016/0304-4203(96)00010-2>
 
 ## Diffusivity in soil air and water
 
-- [CH78] Clapp, R. B. and Hornberger, G. M. (1978). Empirical equations
+* [CH78] Clapp, R. B. and Hornberger, G. M. (1978). Empirical equations
   for some soil hydraulic properties. *Water Resources Res.*, 14(4), 601--604.
   <https://doi.org/10.1029/WR014i004p00601>
-- [M03] Moldrup, P., Olesen, T., Komatsu, T, Yoshikawa, S, Schjønning, P, and
+* [M03] Moldrup, P., Olesen, T., Komatsu, T, Yoshikawa, S, Schjønning, P, and
   Rolston, D. E. (2003). Modeling diffusion and reaction in soils: X. A
   unifying model for solute and gas diffusivity in unsaturated soil. *Soil
   Sci.*, 168(5), 321--337. <https://doi.org/10.1097/01.ss.0000070907.55992.3c>
@@ -148,19 +148,19 @@ including H2O, CO2, CH4, CO, SO2, O3, NH3, N2O, NO, NO2, N2, O2, and COS.
 
 # Arguments
 
-- `species`: Chemical name of the gas species to be evaluated. In lower case.
-- `texture`: Soil texture name in lower case.
-- `temp`: Temperature [K].
-- `theta_sat`: Total porosity of the soil [m^3 m^-3].
-- `theta_w`: Water-filled porosity of the soil [m^3 m^-3].
-- `pressure` (*optional*): Ambient pressure [Pa]. Default is the standard
+* `species`: Chemical name of the gas species to be evaluated. In lower case.
+* `texture`: Soil texture name in lower case.
+* `temp`: Temperature [K].
+* `theta_sat`: Total porosity of the soil [m^3 m^-3].
+* `theta_w`: Water-filled porosity of the soil [m^3 m^-3].
+* `pressure` (*optional*): Ambient pressure [Pa]. Default is the standard
   atmospheric pressure.
 
 # See also
 
-- [`diffus_air`](@ref)
-- [`diffus_soil_water`](@ref)
-- [`diffus_soil`](@ref)
+* [`diffus_air`](@ref)
+* [`diffus_soil_water`](@ref)
+* [`diffus_soil`](@ref)
 """
 function diffus_soil_air(species::String, texture::String, temp, theta_sat,
                          theta_w, pressure=atm)
@@ -180,17 +180,17 @@ species including He, Ne, Kr, Xe, Rn, H2, CH4, CO2, CO, NO, and COS.
 
 # Arguments
 
-- `species`: Chemical name of the gas species to be evaluated. In lower case.
-- `texture`: Soil texture name in lower case.
-- `temp`: Temperature [K].
-- `theta_sat`: Total porosity of the soil [m^3 m^-3].
-- `theta_w`: Water-filled porosity of the soil [m^3 m^-3].
+* `species`: Chemical name of the gas species to be evaluated. In lower case.
+* `texture`: Soil texture name in lower case.
+* `temp`: Temperature [K].
+* `theta_sat`: Total porosity of the soil [m^3 m^-3].
+* `theta_w`: Water-filled porosity of the soil [m^3 m^-3].
 
 # See also
 
-- [`diffus_water`](@ref)
-- [`diffus_soil_air`](@ref)
-- [`diffus_soil`](@ref)
+* [`diffus_water`](@ref)
+* [`diffus_soil_air`](@ref)
+* [`diffus_soil`](@ref)
 """
 function diffus_soil_water(species::String, texture::String, temp, theta_sat,
                            theta_w)
@@ -209,18 +209,18 @@ Calculate the total diffusivity of a gas in soil gaseous and aqueous phases
 
 # Arguments
 
-- `species`: Chemical name of the gas species to be evaluated. In lower case.
-- `texture`: Soil texture name in lower case.
-- `temp`: Temperature [K].
-- `theta_sat`: Total porosity of the soil [m^3 m^-3].
-- `theta_w`: Water-filled porosity of the soil [m^3 m^-3].
-- `pressure` (*optional*): Ambient pressure [Pa]. Default is the standard
+* `species`: Chemical name of the gas species to be evaluated. In lower case.
+* `texture`: Soil texture name in lower case.
+* `temp`: Temperature [K].
+* `theta_sat`: Total porosity of the soil [m^3 m^-3].
+* `theta_w`: Water-filled porosity of the soil [m^3 m^-3].
+* `pressure` (*optional*): Ambient pressure [Pa]. Default is the standard
   atmospheric pressure.
 
 # See also
 
-- [`diffus_soil_air`](@ref)
-- [`diffus_soil_water`](@ref)
+* [`diffus_soil_air`](@ref)
+* [`diffus_soil_water`](@ref)
 """
 function diffus_soil(species::String, texture::String, temp, theta_sat,
                      theta_w, pressure=atm)

@@ -17,33 +17,33 @@ Water and water vapor properties.
 
 ## Water density
 
-- [WP02] Wagner, W. and Pruß, A. (2002). The IAPWS Formulation 1995 for the
+* [WP02] Wagner, W. and Pruß, A. (2002). The IAPWS Formulation 1995 for the
   Thermodynamic Properties of Ordinary Water Substance for General and
   Scientific Use. *J. Phys. Chem. Ref. Data*, 31, 387--535.
   <https://doi.org/10.1063/1.1461829>.
 
 ## Water dissociation constant
 
-- [BL06] Bandura, A. V. and Lvov, S. N. (2006). The ionization constant of
+* [BL06] Bandura, A. V. and Lvov, S. N. (2006). The ionization constant of
   water over wide ranges of temperature and density. *J. Phys. Chem. Ref.
   Data*, 35, 15--30. <https://doi.org/10.1063/1.1928231>.
 
 ## Latent heat
 
-- [H84] Henderson-Sellers, B. (1984). A new formula for latent heat of
+* [H84] Henderson-Sellers, B. (1984). A new formula for latent heat of
   vaporization of water as a function of temperature. *Quart. J. Roy. Meteorol.
   Soc.*, 110(466), 1186--1190. <https://doi.org/10.1002/qj.49711046626>.
-- [MK05] Murphy, D. M., and Koop, T. (2005). Review of the vapour pressures of
+* [MK05] Murphy, D. M., and Koop, T. (2005). Review of the vapour pressures of
   ice and supercooled water for atmospheric applications. *Quart. J. Roy.
   Meteorol. Soc.*, 131(608), 1539--1565. <https://doi.org/10.1256/qj.04.94>.
 
 ## Saturation vapor pressure
 
-- [GG46] Goff, J. A., and Gratch, S. (1946). Low-pressure properties of water
+* [GG46] Goff, J. A., and Gratch, S. (1946). Low-pressure properties of water
   from -160 to 212 F, in *Transactions of the American Society of Heating and
   Ventilating Engineers*, pp 95--122, presented at the 52nd Annual Meeting of
   the American Society of Heating and Ventilating Engineers, New York, NY, USA.
-- [V16] Vömel, Holger. (2016). *Saturation vapor pressure formulations*.
+* [V16] Vömel, Holger. (2016). *Saturation vapor pressure formulations*.
   Earth Observing Laboratory, National Center for Atmospheric Research,
   Boulder, CO, USA. Retrieved from <http://cires1.colorado.edu/~voemel/vp.html>
   on 2017-10-09.
