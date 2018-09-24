@@ -16,8 +16,9 @@ A laundry list of things to implement before version 1.0.
     - [5.2 Solar radiation and position](#52-solar-radiation-and-position)
     - [5.3 Canopy 1-D radiative transfer](#53-canopy-1-d-radiative-transfer)
 - [6. Transfer coefficients (`Canopy.Transfer`)](#6-transfer-coefficients-canopytransfer)
-    - [6.1 Heat and momentum transfer](#61-heat-and-momentum-transfer)
-    - [6.2 Mass transfer](#62-mass-transfer)
+    - [6.1 Momentum transfer](#61-momentum-transfer)
+    - [6.2 Heat transfer](#62-heat-transfer)
+    - [6.3 Mass transfer](#63-mass-transfer)
 - [7. Water transport](#7-water-transport)
 - [8. Leaf and canopy processes](#8-leaf-and-canopy-processes)
     - [8.1 Leaf energy balance](#81-leaf-energy-balance)
@@ -105,23 +106,26 @@ A laundry list of things to implement before version 1.0.
 
 ## 6. Transfer coefficients (`Canopy.Transfer`)
 
-### 6.1 Heat and momentum transfer
+### 6.1 Momentum transfer
 
-- [ ] `dyn_visc_vapor`
-- [ ] `therm_cond_vapor`
-- [ ] `heat_cap_vapor`
-- [ ] `diffusivity_vapor`
-- [ ] `dyn_visc_dryair`
-- [ ] `therm_cond_dryair`
-- [ ] `heat_cap_dryair`
-- [ ] `dyn_visc_moistair`
-- [ ] `therm_cond_moistair`
-- [ ] `heat_cap_moistair`
-- [ ] `heat_cap_mass_moistair`
-- [ ] `therm_diff_moistair`
-- [ ] `prandtl`
+- [X] `dyn_visc_dryair`: Dynamic viscosity of dry air. [2018-09-24]
+- [X] `dyn_visc_vapor`: Dynamic viscosity of water vapor. [2018-09-24]
+- [X] `dyn_visc_moistair`: Dynamic viscosity of moist air. [2018-09-24]
 
-### 6.2 Mass transfer
+### 6.2 Heat transfer
+
+- [X] `therm_cond_dryair`: Thermal conductivity of dry air. [2018-09-24]
+- [X] `heat_cap_dryair`: Isobaric heat capacity of dry air. [2018-09-24]
+- [X] `therm_cond_vapor`: Thermal conductivity of water vapor. [2018-09-24]
+- [X] `heat_cap_vapor`: Isobaric heat capacity of water vapor. [2018-09-24]
+- [X] `therm_cond_moistair`: Thermal conductivity of moist air. [2018-09-24]
+- [X] `heat_cap_moistair`: Isobaric heat capacity of moist air. [2018-09-24]
+- [X] `heat_cap_mass_moistair`: Isobaric heat capacity (per unit mass) of moist
+  air. [2018-09-24]
+- [X] `therm_diff_moistair`: Thermal diffusivity of moist air. [2018-09-24]
+- [X] `prandtl`: Prandtl number of moist air. [2018-09-24]
+
+### 6.3 Mass transfer
 
 - [X] `diffus_air`: Gas diffusivity in air. [2018-09-21]
 - [X] `diffus_water`: Gas diffusivity in water. [2018-09-21]

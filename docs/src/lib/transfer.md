@@ -6,6 +6,20 @@ DocTestSetup = quote
 end
 ```
 
+## Momentum transfer
+
+```@autodocs
+Modules = [Canopy.Transfer.Momentum]
+Private = false
+```
+
+## Heat transfer
+
+```@autodocs
+Modules = [Canopy.Transfer.Heat]
+Private = false
+```
+
 ## Mass transfer
 
 ```@autodocs

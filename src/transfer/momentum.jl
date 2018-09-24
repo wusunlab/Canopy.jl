@@ -1,6 +1,10 @@
 """
 Momentum transfer coefficients.
 
+* [`dyn_visc_dryair`](@ref)
+* [`dyn_visc_vapor`](@ref)
+* [`dyn_visc_moistair`](@ref)
+
 # References
 
 * [T08] Tsilingiris, P. T. (2008). Thermophysical and transport properties of
@@ -10,10 +14,10 @@ Momentum transfer coefficients.
 """
 module Momentum
 
+include("../docstring_style.jl")
+
 using Canopy.Constants: M_w, M_d
 using Canopy.Water: vapor_mole_frac
-
-include("../docstring_style.jl")
 
 export dyn_visc_dryair,
     dyn_visc_vapor,
@@ -21,9 +25,12 @@ export dyn_visc_dryair,
 
 """
 Calculate the dynamic viscosity of dry air [kg m^-1 s^-1] from temperature [K].
+Applicable between 250 and 600 K.
 
-Applicable between 250 and 600 K. The influence of pressure is negligible when
-pressure < a few MPa.
+!!! note
+
+    The influence of pressure is not considered because it is negligible when
+    pressure < a few MPa.
 """
 dyn_visc_dryair(temp) = @evalpoly(
     temp, -9.8601e-1, 9.080125e-2, -1.17635575e-4,
@@ -31,10 +38,12 @@ dyn_visc_dryair(temp) = @evalpoly(
 
 """
 Calculate the dynamic viscosity of water vapor [kg m^-1 s^-1] from temperature
-[K].
+[K]. Applicable between 273 and 393 K.
 
-Applicable between 273 and 393 K. The influence of pressure is negligible when
-pressure < a few MPa.
+!!! note
+
+    The influence of pressure is not considered because it is negligible when
+    pressure < a few MPa.
 """
 dyn_visc_vapor(temp) = -2.869368957406498e-06 + 4.000549451e-8 * temp
 
