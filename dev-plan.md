@@ -19,7 +19,7 @@ A laundry list of things to implement before version 1.0.
     - [6.1 Momentum transfer](#61-momentum-transfer)
     - [6.2 Heat transfer](#62-heat-transfer)
     - [6.3 Mass transfer](#63-mass-transfer)
-- [7. Water transport](#7-water-transport)
+- [7. Terrestrial water cycle](#7-terrestrial-water-cycle)
 - [8. Leaf and canopy processes](#8-leaf-and-canopy-processes)
     - [8.1 Leaf energy balance](#81-leaf-energy-balance)
     - [8.2 Photosynthesis](#82-photosynthesis)
@@ -133,7 +133,12 @@ A laundry list of things to implement before version 1.0.
 - [X] `diffus_soil_water`: Gas diffusivity in soil water. [2018-09-21]
 - [X] `diffus_soil`: Dual-phase gas diffusivity in soil. [2018-09-21]
 
-## 7. Water transport
+## 7. Terrestrial water cycle
+
+- [X] `psychrometric_constant`: Calculate the psychrometric constant.
+  [2018-09-25]
+- [X] `penman_monteith`: Calculate latent heat flux or evapotranspiration using
+  Penman--Monteith equation. [2018-09-25]
 
 ## 8. Leaf and canopy processes
 
