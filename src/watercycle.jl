@@ -68,8 +68,8 @@ constant.
   (\$R_\\mathrm{net}\$) -- heat storage (\$G\$).
 * `cond_atm`: Aerodynamic conductance [m s^-1].
 * `cond_sfc`: Canopy surface conductance [m s^-1].
-* `evap` (*kwarg*): If `true`, return evapotranspiration flux instead of latent
-  heat flux (default).
+* `evap` (*kwarg*): Default is `false`. If `true`, return evapotranspiration
+  flux instead of latent heat flux.
 """
 function penman_monteith(temp, pressure, RH, heat_flux, cond_atm, cond_sfc;
                          evap::Bool=false)
@@ -89,11 +89,11 @@ Penman--Monteith equation.
 
 ```math
 G_\\mathrm{c} = \\gamma \\left[
-    \\dfrac{G_\\mathrm{a}\\cdot\\rho_\\mathrm{a}\\cdot D}{LE} +
-    \\Delta \\cdot \\beta - \\gamma \\right]^{-1} \\cdot G_\\mathrm{a}
+    \\dfrac{G_\\mathrm{a}\\rho_\\mathrm{a} c_p D}{LE} +
+    \\Delta \\cdot \\beta - \\gamma \\right]^{-1} G_\\mathrm{a}
 ```
 
-where \$\\beta := \\dfrac{H}{LE}\$.
+where \$\\beta := \\dfrac{H}{LE}\$ is the Bowen ratio.
 
 # Arguments
 
