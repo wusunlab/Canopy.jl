@@ -25,7 +25,7 @@ include("../docstring_style.jl")
 using Canopy.Constants: T_0, M_w, M_d
 using Canopy.Water: vapor_mole_frac
 using Canopy.Air: air_density
-using Canopy.Transfer.Momentum: viscosity_interaction_terms  # helper function
+using Canopy.Transfer.Momentum: dyn_visc_moistair, viscosity_interaction_terms
 
 export therm_cond_dryair,
     heat_cap_dryair,
