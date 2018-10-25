@@ -2,7 +2,7 @@ module TestWater
 
 using Test
 using LinearAlgebra
-using Canopy.Constants
+using Canopy.Constants: T_0
 using Canopy.Water
 
 rho_w_validat = hcat(

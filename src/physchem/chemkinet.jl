@@ -2,8 +2,8 @@
 Basic chemical kinetics.
 
 * [`arrhenius`](@ref)
-* [`q10_func`](@ref)
-* [`enzyme_temp_dependence`](@ref)
+* [`q10_temp_dep`](@ref)
+* [`enzyme_temp_dep`](@ref)
 * [`enzyme_temp_optimum`](@ref)
 """
 module ChemKinet
@@ -13,8 +13,8 @@ include("../docstring_style.jl")
 using Canopy.Constants: R
 
 export arrhenius,
-    q10_func,
-    enzyme_temp_dependence,
+    q10_temp_dep,
+    enzyme_temp_dep,
     enzyme_temp_optimum
 
 """
@@ -49,11 +49,11 @@ a reference temperature (`ref`) using an exponential function defined by a
 # Examples
 
 ```jldoctest
-julia> q10_func(283.15, 298.15, 2.)
+julia> q10_temp_dep(283.15, 298.15, 2.)
 0.3535533905932738
 ```
 """
-q10_func(temp, ref, q10) = q10 ^ (0.1 * (temp - ref))
+q10_temp_dep(temp, ref, q10) = q10 ^ (0.1 * (temp - ref))
 
 """
 A helper function to calculate the enzyme reaction rate at a given temperature
@@ -78,9 +78,9 @@ f(T) = \\dfrac{\\exp\\left(-\\dfrac{\\Delta G_\\mathrm{a}}{R T}\\right)}{
 !!! note
 
     This function is reserved for internal calls. Use
-    [`enzyme_temp_dependence`](@ref) for calculation.
+    [`enzyme_temp_dep`](@ref) for calculation.
 """
-f_enzyme_temp_dependence(temp, Delta_G_a, Delta_H_d, Delta_S_d) =
+f_enzyme_temp_dep(temp, Delta_G_a, Delta_H_d, Delta_S_d) =
     exp(- Delta_G_a / (R * temp)) /
     (1. + exp((Delta_S_d - Delta_H_d / temp) / R))
 
@@ -129,7 +129,7 @@ optimum.
 # Examples
 
 ```jldoctest
-julia> enzyme_temp_dependence(283.15, 298.15, 4e4, 2e5, 660.)
+julia> enzyme_temp_dep(283.15, 298.15, 4e4, 2e5, 660.)
 0.539321882992312
 ```
 
@@ -137,9 +137,9 @@ julia> enzyme_temp_dependence(283.15, 298.15, 4e4, 2e5, 660.)
 
 [`enzyme_temp_optimum`](@ref)
 """
-enzyme_temp_dependence(temp, ref, Delta_G_a, Delta_H_d, Delta_S_d) =
-    f_enzyme_temp_dependence(temp, Delta_G_a, Delta_H_d, Delta_S_d) /
-    f_enzyme_temp_dependence(ref, Delta_G_a, Delta_H_d, Delta_S_d)
+enzyme_temp_dep(temp, ref, Delta_G_a, Delta_H_d, Delta_S_d) =
+    f_enzyme_temp_dep(temp, Delta_G_a, Delta_H_d, Delta_S_d) /
+    f_enzyme_temp_dep(ref, Delta_G_a, Delta_H_d, Delta_S_d)
 
 """
 Calculates the temperature optimum of an enzyme reaction [K].
@@ -168,7 +168,7 @@ julia> enzyme_temp_optimum(4e4, 2e5, 660.)
 
 # See also
 
-[`enzyme_temp_dependence`](@ref)
+[`enzyme_temp_dep`](@ref)
 """
 enzyme_temp_optimum(Delta_G_a, Delta_H_d, Delta_S_d) =
     Delta_H_d / (Delta_S_d + R * log(Delta_H_d / Delta_G_a - 1.))

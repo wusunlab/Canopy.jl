@@ -1,7 +1,7 @@
 """
 Air properties.
 
-* [`air_concentration`](@ref)
+* [`air_molar`](@ref)
 * [`air_density`](@ref)
 """
 module Air
@@ -11,7 +11,7 @@ include("docstring_style.jl")
 using Canopy.Constants: R, M_w, M_d
 using Canopy.Water: vapor_mole_frac
 
-export air_concentration,
+export air_molar,
     air_density
 
 """
@@ -21,11 +21,11 @@ pressure [Pa].
 # Examples
 
 ```jldoctest
-julia> air_concentration(298.15, 101325.0)
+julia> air_molar(298.15, 101325.0)
 40.87405837767172
 ```
 """
-air_concentration(temp, pressure) = pressure / (R * temp)
+air_molar(temp, pressure) = pressure / (R * temp)
 
 """
 Calculate the air density [kg m^-3] from temperature [K], pressure [Pa], and
@@ -45,7 +45,7 @@ function air_density(temp, pressure, RH)
     chi_w = vapor_mole_frac(temp, pressure, RH)
     # molar mass of moist air [kg mol^-1]
     M_a = (1. - chi_w) * M_d + chi_w * M_w
-    return M_a * air_concentration(temp, pressure)
+    return M_a * air_molar(temp, pressure)
 end
 
 end  # module

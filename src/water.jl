@@ -6,12 +6,12 @@ Water and water vapor properties.
 * [`latent_heat_vap`](@ref)
 * [`latent_heat_sub`](@ref)
 * [`e_sat`](@ref)
-* [`e_sat_prime`](@ref)
+* [`e_sat_deriv`](@ref)
 * [`e_sat_ice`](@ref)
-* [`e_sat_ice_prime`](@ref)
-* [`vapor_pressure_deficit`](@ref)
+* [`e_sat_ice_deriv`](@ref)
+* [`vapor_deficit`](@ref)
 * [`vapor_mole_frac`](@ref)
-* [`mole_frac_vapor_deficit`](@ref)
+* [`vapor_deficit_mole_frac`](@ref)
 
 # References
 
@@ -59,12 +59,12 @@ export water_density,
     latent_heat_vap,
     latent_heat_sub,
     e_sat,
-    e_sat_prime,
+    e_sat_deriv,
     e_sat_ice,
-    e_sat_ice_prime,
-    vapor_pressure_deficit,
+    e_sat_ice_deriv,
+    vapor_deficit,
     vapor_mole_frac,
-    mole_frac_vapor_deficit
+    vapor_deficit_mole_frac
 
 """
 Calculate water density [kg m^-3] as a function of temperature [K].
@@ -192,20 +192,20 @@ K^-1].
 # Examples
 
 ```jldoctest
-julia> e_sat_prime(298.15)  # 25 C
+julia> e_sat_deriv(298.15)  # 25 C
 188.6862159855073
 
-julia> e_sat_prime(273.15)  # 0 C
+julia> e_sat_deriv(273.15)  # 0 C
 44.35218469842299
 ```
 """
-function e_sat_prime(temp)
-    log_e_sat_prime = (6790.4984743899386 +
+function e_sat_deriv(temp)
+    log_e_sat_deriv = (6790.4984743899386 +
                        exp(12.068003566856145 -
                            3000.0022166762069 / temp)) / (temp * temp) -
         5.02808 / temp +
         exp(8.5004184700093912 - 0.069998191914793798 * temp)
-    return e_sat(temp) * log_e_sat_prime
+    return e_sat(temp) * log_e_sat_deriv
 end
 
 """
@@ -238,17 +238,17 @@ Calculate the temperature derivative of saturation vapor pressure of water ice
 # Examples
 
 ```jldoctest
-julia> e_sat_ice_prime(258.15)  # -15 C
+julia> e_sat_ice_deriv(258.15)  # -15 C
 15.228515762185872
 
-julia> e_sat_ice_prime(273.15)  # 0 C
+julia> e_sat_ice_deriv(273.15)  # 0 C
 50.254185101185534
 ```
 """
-function e_sat_ice_prime(temp)
-    log_e_sat_prime = 5721.891003334422 / (temp * temp) +
+function e_sat_ice_deriv(temp)
+    log_e_sat_deriv = 5721.891003334422 / (temp * temp) +
         3.56654 / temp - 0.007390871618983484
-    return e_sat_ice(temp) * log_e_sat_prime
+    return e_sat_ice(temp) * log_e_sat_deriv
 end
 
 """
@@ -258,14 +258,14 @@ humidity [0--1].
 # Examples
 
 ```jldoctest
-julia> vapor_pressure_deficit(298.15, 0.5)
+julia> vapor_deficit(298.15, 0.5)
 1582.5978166918403
 
-julia> vapor_pressure_deficit(288.15, 0.6)
+julia> vapor_deficit(288.15, 0.6)
 681.3124028440158
 ```
 """
-vapor_pressure_deficit(temp, RH) = e_sat(temp) * (1. - RH)
+vapor_deficit(temp, RH) = e_sat(temp) * (1. - RH)
 
 """
 Calculate water vapor mole fraction [mol mol^-1] from temperature [K], pressure
@@ -290,14 +290,14 @@ pressure [Pa], and relative humidity [0--1].
 # Examples
 
 ```jldoctest
-julia> mole_frac_vapor_deficit(298.15, 101325.0, 0.7)
+julia> vapor_deficit_mole_frac(298.15, 101325.0, 0.7)
 0.009371415642882845
 
-julia> mole_frac_vapor_deficit(288.15, 5e4, 0.8)
+julia> vapor_deficit_mole_frac(288.15, 5e4, 0.8)
 0.006813124028440155
 ```
 """
-mole_frac_vapor_deficit(temp, pressure, RH) =
-    vapor_pressure_deficit(temp, RH) / pressure
+vapor_deficit_mole_frac(temp, pressure, RH) =
+    vapor_deficit(temp, RH) / pressure
 
 end  # module

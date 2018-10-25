@@ -2,7 +2,7 @@
 Solar position and radiation functions.
 
 * [`eccentricity`](@ref)
-* [`atmospheric_refraction`](@ref)
+* [`atmos_refrac`](@ref)
 * [`solar_angle`](@ref)
 """
 module Solar
@@ -12,7 +12,7 @@ include("../docstring_style.jl")
 import Dates
 
 export eccentricity,
-    atmospheric_refraction,
+    atmos_refrac,
     solar_angle
 
 """
@@ -86,14 +86,14 @@ Calculate the atmospheric refraction effect from solar elevation angle
 # Examples
 
 ```jldoctest
-julia> atmospheric_refraction(40.)
+julia> atmos_refrac(40.)
 0.019200724191321145
 
-julia> atmospheric_refraction(-1.0)
+julia> atmos_refrac(-1.0)
 0.3305949063659434
 ```
 """
-function atmospheric_refraction(angle)
+function atmos_refrac(angle)
     if angle > 85.
         return 0.
     elseif 5. < angle <= 85.
@@ -246,7 +246,7 @@ function solar_angle(dt::Dates.DateTime, lat, lon, timezone=0.)
         hour_angle > 0 ? mod(x + 180., 360.) : mod(540 - x, 360.)
     end
     # approximate atmospheric refraction effect [deg]
-    approx_atmos_refrac = atmospheric_refraction(solar_elev_angle)
+    approx_atmos_refrac = atmos_refrac(solar_elev_angle)
     # corrected zenith angle and elevation angles [deg]
     solar_zenith_angle_corr = solar_zenith_angle - approx_atmos_refrac
     solar_elev_angle_corr = solar_elev_angle + approx_atmos_refrac

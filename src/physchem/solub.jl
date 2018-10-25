@@ -9,7 +9,7 @@ module Solub
 include("../docstring_style.jl")
 
 using Canopy.Constants: atm
-using Canopy.Air: air_concentration
+using Canopy.Air: air_molar
 
 export solub_co2,
     solub_cos
@@ -43,7 +43,7 @@ function solub_co2(temp, salinity=0.; bunsen::Bool=true)
     # Henry solubility [mol L^-1 atm^-1]
     kcp_co2 = exp(-58.0931 + 90.5069 / t + 22.2940 * log(t) +
                   salinity * (0.027766 - 0.025888 * t + 0.0050578 * t * t))
-    return bunsen ? kcp_co2 * 1e3 / air_concentration(temp, atm) : kcp_co2
+    return bunsen ? kcp_co2 * 1e3 / air_molar(temp, atm) : kcp_co2
 end
 
 """
@@ -75,7 +75,7 @@ julia> solub_cos(298.15; bunsen=false)
 function solub_cos(temp; bunsen::Bool=true)
     # Bunsen solubility [dimensionless]
     k_cos = temp * exp(4050.32 / temp - 20.0007)
-    return bunsen ? k_cos : k_cos * air_concentration(temp, atm) * 1e-3
+    return bunsen ? k_cos : k_cos * air_molar(temp, atm) * 1e-3
 end
 
 solub_gas(temp) = error("Not implemented!")

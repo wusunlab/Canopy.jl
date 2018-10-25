@@ -1,7 +1,7 @@
 """
 Terrestrial water cycle: evapotranspiration, precipitation, and runoff.
 
-* [`psychrometric_constant`](@ref)
+* [`psychromet`](@ref)
 * [`penman_monteith`](@ref)
 * [`cond_sfc`](@ref)
 
@@ -18,29 +18,29 @@ module WaterCycle
 include("docstring_style.jl")
 
 using Canopy.Constants: M_w, M_d
-using Canopy.Water: latent_heat_vap, e_sat_prime, vapor_pressure_deficit
+using Canopy.Water: latent_heat_vap, e_sat_deriv, vapor_deficit
 using Canopy.Air: air_density
 using Canopy.Transfer.Heat: heat_cap_mass_moistair
 
-export psychrometric_constant,
+export psychromet,
     penman_monteith,
     cond_sfc
 
 """
-Calculate the psychrometric constant [Pa K^-1] from temperature [K], pressure
+Calculate the psychromet constant [Pa K^-1] from temperature [K], pressure
 [Pa], and relative humidity [0--1].
 
 # Examples
 
 ```jldoctest
-julia> psychrometric_constant(298.15, 101325.0, 0.7)
+julia> psychromet(298.15, 101325.0, 0.7)
 67.91408269550081
 
-julia> psychrometric_constant(283.15, 101325.0, 0.9)
+julia> psychromet(283.15, 101325.0, 0.9)
 66.5430908894645
 ```
 """
-psychrometric_constant(temp, pressure, RH) =
+psychromet(temp, pressure, RH) =
     heat_cap_mass_moistair(temp, pressure, RH) * pressure *
     M_d / latent_heat_vap(temp)
 # note: M_w cancels out because latent_heat_vap returns value in J mol^-1 K^-1
@@ -56,7 +56,7 @@ LE = \\dfrac
     {\\Delta + \\gamma (1 + G_\\mathrm{a} / G_\\mathrm{c})}
 ```
 
-where \$\\Delta := e_\\mathrm{sat}'(T)\$ and \$\\gamma\$ is the psychrometric
+where \$\\Delta := e_\\mathrm{sat}'(T)\$ and \$\\gamma\$ is the psychromet
 constant.
 
 # Arguments
@@ -73,11 +73,11 @@ constant.
 """
 function penman_monteith(temp, pressure, RH, heat_flux, cond_atm, cond_sfc;
                          evap::Bool=false)
-    Delta = e_sat_prime(temp)
-    gamma = psychrometric_constant(temp, pressure, RH)
+    Delta = e_sat_deriv(temp)
+    gamma = psychromet(temp, pressure, RH)
     rho_a = air_density(temp, pressure, RH)
     c_p = heat_cap_mass_moistair(temp, pressure, RH)
-    D = vapor_pressure_deficit(temp, RH)
+    D = vapor_deficit(temp, RH)
     LE = (Delta * heat_flux + rho_a * c_p * D * cond_atm) /
         (Delta + gamma * (1. + cond_atm / cond_sfc))
     return evap ? LE / latent_heat_vap(temp) : LE
@@ -105,11 +105,11 @@ where \$\\beta := \\dfrac{H}{LE}\$ is the Bowen ratio.
 * `cond_atm`: Aerodynamic conductance [m s^-1].
 """
 function cond_sfc(temp, pressure, RH, LE, bowen, cond_atm)
-    Delta = e_sat_prime(temp)
-    gamma = psychrometric_constant(temp, pressure, RH)
+    Delta = e_sat_deriv(temp)
+    gamma = psychromet(temp, pressure, RH)
     rho_a = air_density(temp, pressure, RH)
     c_p = heat_cap_mass_moistair(temp, pressure, RH)
-    D = vapor_pressure_deficit(temp, RH)
+    D = vapor_deficit(temp, RH)
     return cond_atm * gamma / (cond_atm * rho_a * c_p * D / LE +
                                Delta * bowen - gamma)
 end

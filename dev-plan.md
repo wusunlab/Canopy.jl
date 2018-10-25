@@ -44,18 +44,18 @@ A laundry list of things to implement before version 1.0.
 - [X] `latent_heat_sub`: Latent heat of sublimation. [2018-08-10]
 - [X] `e_sat`: Saturation vapor pressure of liquid water. [2018-08-10]
 - [X] `e_sat_ice`: Saturation vapor pressure of water ice. [2018-08-10]
-- [X] `e_sat_prime`: Temperature derivative of the saturation vapor pressure of
+- [X] `e_sat_deriv`: Temperature derivative of the saturation vapor pressure of
   liquid water. [2018-08-10]
-- [X] `e_sat_ice_prime`: Temperature derivative of the saturation vapor
+- [X] `e_sat_ice_deriv`: Temperature derivative of the saturation vapor
   pressure of water ice. [2018-08-10]
-- [X] `vapor_pressure_deficit`: Water vapor pressure deficit. [2018-08-10]
+- [X] `vapor_deficit`: Water vapor pressure deficit. [2018-08-10]
 - [X] `vapor_mole_frac`: Water vapor mole fraction. [2018-08-10]
-- [X] `mole_frac_vapor_deficit`: Mole-fraction water vapor deficit.
+- [X] `vapor_deficit_mole_frac`: Water vapor deficit in mole fraction.
   [2018-08-10]
 
 ## 3. Dry and moist air properties (`Canopy.Air`)
 
-- [X] `air_concentration`: Calculate the molar concentration of air [mol m^-3].
+- [X] `air_molar`: Calculate the molar concentration of air [mol m^-3].
   [2018-08-12]
 - [X] `air_density`: Calculate air density [kg m^-3]. [2018-08-12]
 
@@ -64,17 +64,18 @@ A laundry list of things to implement before version 1.0.
 ### 4.1 Chemical kinetics
 
 - [X] `arrhenius`: Arrhenius equation for temperature dependence. [2018-09-20]
-- [X] `q10_func`: Q<sub>10</sub> (exponential) type equation for temperature
-  dependence. [2018-09-20]
-- [X] `enzyme_temperature_dependence`: Temperature dependence of an enzyme
+- [X] `q10_temp_dep`: *Q*<sub>10</sub> (exponential) type equation for
+  temperature dependence. [2018-09-20]
+- [X] `enzyme_temp_dep`: Temperature dependence of an enzyme reaction.
+  [2018-09-20]
+- [X] `enzyme_temp_optimum`: Calculate the temperature optimum of an enzyme
   reaction. [2018-09-20]
-- [X] `enzyme_temperature_optimum`: Calculate the temperature optimum of an
-  enzyme reaction. [2018-09-20]
 
 ### 4.2 Gas solubility
 
 - [ ] `solub_gas`
-- [X] `solub_co2`: CO2 solubility in fresh water or seawater. [2018-09-21]
+- [X] `solub_co2`: CO<sub>2</sub> solubility in fresh water or seawater.
+  [2018-09-21]
 - [X] `solub_cos`: COS solubility in pure water. [2018-09-21]
 
 ### 4.3 Reactions
@@ -99,8 +100,8 @@ A laundry list of things to implement before version 1.0.
 - [X] `eccentricity`: Calculate the eccentricity of the earth's orbit.
   [2018-09-20]
 - [X] `solar_angle`: Calculate the solar position. [2018-09-20]
-- [X] `atmospheric_refraction`: Calculate atmospheric refraction effect on
-  solar zenith angle. [2018-09-20]
+- [X] `atmos_refrac`: Calculate atmospheric refraction effect on the solar
+  zenith angle. [2018-09-20]
 
 ### 5.3 Canopy 1-D radiative transfer
 
@@ -135,9 +136,10 @@ A laundry list of things to implement before version 1.0.
 
 ## 7. Terrestrial water cycle
 
-- [X] `psychrometric_constant`: Calculate the psychrometric constant.
-  [2018-09-25]
+- [X] `psychromet`: Calculate the psychrometric constant. [2018-09-25]
 - [X] `penman_monteith`: Calculate latent heat flux or evapotranspiration using
+  Penman--Monteith equation. [2018-09-25]
+- [X] `cond_sfc`: Calculate canopy surface conductance from the inverted
   Penman--Monteith equation. [2018-09-25]
 
 ## 8. Leaf and canopy processes
@@ -148,7 +150,7 @@ A laundry list of things to implement before version 1.0.
 - [ ] `bl_cond_vapor`
 - [ ] `PAR_to_shortwave`
 - [ ] `sensible_heat`
-- [ ] `leaf_vapor_pressure_deficit`
+- [ ] `leaf_vapor_deficit`
 - [ ] `transpiration`
 - [ ] `latent_heat`
 - [ ] `energy_imbalance`

@@ -29,12 +29,12 @@ end
     @test isapprox(eccentricity(1), 0.01627, rtol=1e-3)  # 3000 AD
     @test isapprox(eccentricity(DateTime(3000)), eccentricity(1), rtol=1e-6)
 
-    # atmospheric_refraction
-    @test atmospheric_refraction(89.) == 0.0
+    # atmos_refrac
+    @test atmos_refrac(89.) == 0.0
     angle = 40.
     # compare with a simpler approximation by Bennett (1982) J. Navigat.
     # accuracy = 0.1 arcmin
-    @test isapprox(atmospheric_refraction(angle),
+    @test isapprox(atmos_refrac(angle),
                    cotd(angle + 7.31 / (angle + 4.4)) / 60., atol=0.1 / 60.)
 
     # solar_angle
