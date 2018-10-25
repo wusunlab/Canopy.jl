@@ -53,7 +53,7 @@ export bl_cond_heat,
 
 """
 Calculate leaf boundary layer conductance for heat transfer
-(\$g_\\mathrm{b,H}\$) [mol m^-2 s^-1].
+(``g_\\mathrm{b,H}``) [mol m^-2 s^-1].
 
 ```math
 g_\\mathrm{b,H} = \\frac{1.4\\,\\mathrm{Nu}\\cdot \\chi_\\mathrm{a}\\cdot
@@ -62,9 +62,9 @@ g_\\mathrm{b,H} = \\frac{1.4\\,\\mathrm{Nu}\\cdot \\chi_\\mathrm{a}\\cdot
 
 where
 
-* Nu = 0.664 Re\$^{1/2}\$ Pr\$^{1/3}\$ is the Nusselt number;
-* \$\\chi_\\mathrm{a}\$ [mol m^-3] is the molar concentration of air;
-* \$D_\\mathrm{H}\$ [m^2 s^-1] is the thermal diffusivity of air.
+* Nu = 0.664 Re``^{1/2}`` Pr``^{1/3}`` is the Nusselt number;
+* ``\\chi_\\mathrm{a}`` [mol m^-3] is the molar concentration of air;
+* ``D_\\mathrm{H}`` [m^2 s^-1] is the thermal diffusivity of air.
 
 The multiplier 1.4 is a correction factor for leaves in field conditions.
 
@@ -94,7 +94,7 @@ end
 
 """
 Calculate leaf boundary layer conductance for water vapor transfer
-(\$g_\\mathrm{b,W}\$).
+(``g_\\mathrm{b,W}``).
 
 ```math
 g_\\mathrm{b,W} = \\frac{1.4\\cdot 0.664\\ \\mathrm{Re}^{1/2}\\
@@ -103,10 +103,10 @@ g_\\mathrm{b,W} = \\frac{1.4\\cdot 0.664\\ \\mathrm{Re}^{1/2}\\
 
 where
 
-* \$\\mathrm{Sc} = \\nu_\\mathrm{a} / D_\\mathrm{W}\$ is the Schmidt number;
-* \$\\nu_\\mathrm{a}\$ [m^2 s^-1] is the kinematic viscosity of air;
-* \$D_\\mathrm{W}\$ [m^2 s^-1] is the diffusivity of water vapor in air;
-* \$\\chi_\\mathrm{a}\$ [mol m^-3] is the molar concentration of air.
+* ``\\mathrm{Sc} = \\nu_\\mathrm{a} / D_\\mathrm{W}`` is the Schmidt number;
+* ``\\nu_\\mathrm{a}`` [m^2 s^-1] is the kinematic viscosity of air;
+* ``D_\\mathrm{W}`` [m^2 s^-1] is the diffusivity of water vapor in air;
+* ``\\chi_\\mathrm{a}`` [mol m^-3] is the molar concentration of air.
 
 The multiplier 1.4 is a correction factor for leaves in field conditions.
 
@@ -206,8 +206,8 @@ Calculate latent heat transfer rate at the leaf surface [W m^-2].
 \\frac{\\mathrm{VPD}}{p_\\mathrm{atm}}
 ```
 
-where \$ L_\\mathrm{v} \$ is the latent heat of vaporization of water [J
-mol^-1], and \$ g_\\mathrm{tot,W} \$ is the total conductance of water vapor.
+where ``L_\\mathrm{v}`` is the latent heat of vaporization of water [J mol^-1],
+and ``g_\\mathrm{tot,W}`` is the total conductance of water vapor.
 
 # Arguments
 

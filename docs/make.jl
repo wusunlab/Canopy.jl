@@ -14,6 +14,7 @@ makedocs(
             "lib/physchem.md",
             "lib/radtrans.md",
             "lib/transfer.md",
+            "lib/leaf.md",
             "lib/watercycle.md",
         ]
     ]
