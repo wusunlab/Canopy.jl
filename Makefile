@@ -2,7 +2,7 @@
 
 install:
 	make uninstall
-	-julia -e 'using Pkg; Pkg.clone(pwd()); Pkg.build("Canopy")'
+	-julia -e 'using Pkg; Pkg.add(PackageSpec(path="."))'
 
 uninstall:
 	-julia -e 'using Pkg; Pkg.rm("Canopy")'

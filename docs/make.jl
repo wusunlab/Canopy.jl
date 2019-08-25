@@ -2,7 +2,7 @@ using Canopy
 using Documenter
 
 makedocs(
-    format=:html,
+    format=Documenter.HTML(prettyurls=false),  # NOTE: prettyurls does not work
     sitename="Canopy.jl documentation",
     pages=[
         "Home" => "index.md",
