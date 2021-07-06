@@ -20,29 +20,33 @@ export ephoton,
     blackbody_temp
 
 """
-Calculate the energy carried by one photon [J] from its wavelength [m].
+Calculate the energy carried by a photon [J] from its wavelength [m].
 
 # Examples
 
 ```jldoctest
 julia> ephoton(0.5e-6)
-3.9728916483435167e-19
+3.972891714297857e-19
 ```
 """
-ephoton(wl) = h * c / wl
+function ephoton(wl)
+    return h * c / wl
+end
 
 """
-Convert the energy flux density `F` [W m^-2] at the wavelength `wl` [m] to
+Convert the energy flux density `flux` [W m^-2] at the wavelength `wl` [m] to
 photon flux density [mol m^-2 s^-1].
 
 # Examples
 
 ```jldoctest
 julia> energy2photon(300., 0.5e-6)
-0.0012539020849860227
+0.0012539020843667665
 ```
 """
-energy2photon(F, wl) = F * wl / (N_A * h * c)
+function energy2photon(flux, wl)
+    return flux * wl / (N_A * h * c)
+end
 
 """
 Calculate the spectral radiance [W sr^-1 m^-3] from wavelength `wl` [m] and
@@ -52,13 +56,15 @@ blackbody temperature `temp` [K] accroding to Planck's law.
 
 ```jldoctest
 julia> planck(0.5e-6, 6000)
-3.175685463823425e13
+3.175690669942503e13
 
 julia> planck(10e-6, 288)
-8.114231706131072e6
+8.114245536536237e6
 ```
 """
-planck(wl, temp) = c_1L * wl^(-5.) / (exp(c_2 / (wl * temp)) - 1.)
+function planck(wl, temp)
+    return c_1L * wl^(-5.) / (exp(c_2 / (wl * temp)) - 1.)
+end
 
 """
 Calculate the energy flux density [W m^-2] of a blackbody of temperature `temp`
@@ -68,7 +74,7 @@ Calculate the energy flux density [W m^-2] of a blackbody of temperature `temp`
 
 ```jldoctest
 julia> stefan_boltzmann(298.15)
-448.0747004542597
+448.0752867066491
 ```
 """
 function stefan_boltzmann(temp)
@@ -83,9 +89,11 @@ Calculate the blackbody temperature [K] from energy flux density [W m^-2].
 
 ```jldoctest
 julia> blackbody_temp(240.)
-255.06450048559805
+255.06441705528474
 ```
 """
-blackbody_temp(F) = (F / sigma_SB)^0.25
+function blackbody_temp(flux)
+    return (flux / sigma_SB)^0.25
+end
 
 end  # module
