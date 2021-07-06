@@ -1,27 +1,37 @@
+# Canopy.jl
+#
+# Copyright (c) 2018--2021 Wu Sun
+# License: MIT
 """
-A collection of physical constants.
+A list of physical constants.
 
 # References
 
-## 2014 CODATA recommended values:
+## CODATA 2018 constants
 
-* [MNT16a] Mohr, P. J., Newell, D. B., and Taylor, B. N. (2016). CODATA
-  recommended values of the fundamental physical constants: 2014. *Rev. Mod.
-  Phys.*, 88, 035009, 1--73. <https://doi.org/10.1103/RevModPhys.88.035009>.
+* [MNT16a] Mohr, P. J., Newell, D. B., & Taylor, B. N. (2016). CODATA
+  recommended values of the fundamental physical constants: 2014.
+  _Rev. Mod. Phys._ 88, 035009. <https://doi.org/10.1103/RevModPhys.88.035009>
 * [MNT16b] Mohr, P. J., Newell, D. B., and Taylor, B. N. (2016). CODATA
-  Recommended Values of the Fundamental Physical Constants: 2014. *J. Phys.
-  Chem. Ref. Data*, 45, 043102, 1--74. <https://doi.org/10.1063/1.4954402>.
+  recommended values of the fundamental physical constants: 2014.
+  _J. Phys. Chem. Ref. Data_ 45, 043102. <https://doi.org/10.1063/1.4954402>
+* [MNTT18] Mohr, P. J., Newell, D. B., Taylor, B. N., and Tiesinga, E. (2018).
+  Data and analysis for the CODATA 2017 special fundamental constants
+  adjustment. _Metrologia_ 55, 125–146.
+  <https://doi.org/10.1088/1681-7575/aa99bc>
 
-## Inorganics properties:
+## Molar masses
 
-* [CRC] Rumble, J. (eds.) (2017). *CRC Handbook of Chemistry and Physics, 98th
-  Edition*. CRC Press, Boca Raton, FL, USA. ISBN: 9781498784542. Retrieved from
-  <http://hbcponline.com/faces/contents/ContentsSearch.xhtml> on 2018-06-12.
+* [HBCP] Rumble, J. (eds.) (2017). _CRC Handbook of Chemistry and Physics_
+  (98th ed.). CRC Press, Boca Raton, FL, USA. ISBN: 9781498784542.
+  Retrieved from <http://hbcponline.com/faces/contents/ContentsSearch.xhtml>
+  on 2018-06-12.
 """
 module Constants
 
 # Notes
-# 1. Use lower case, except when there is already a commonly used mathematical
+#
+# 1. Use lowercase variable names, except when there is already a commonly used
 #    notation otherwise.
 # 2. Keep the long names self-explanatory.
 
@@ -43,43 +53,43 @@ export c,
     M_d,
     cp_d
 
-"""Speed of light in vacuum [m s^-1]."""
-const c = 2.99_792_458e8
+"""Speed of light in the vacuum [m s^-1]."""
+const c = 2.997_924_58e8
 
-"""Planck constant [J s]."""
-const h = 6.626_070_040e-34
-
-"""Avogadro constant [mol^-1]."""
-const N_A = 6.022_140_857e23
-
-"""Boltzmann constant [J K^-1]."""
-const k_B = 1.380_648_52e-23
-
-"""Stefan--Boltzmann constant [W m^-2 K^-4]."""
-const sigma_SB = 5.670_367e-8
+"""Planck's constant [J s]."""
+const h = 6.626_070_15e-34
 
 """First radiation constant \$2\\pi hc^2\$ [W m^2]."""
-const c_1 = 3.741_771_790e-16
+const c_1 = 3.741_771_852e-16
 
 """First radiation constant for spectral radiance \$2hc^2\$ [W m^-2 sr^-1]."""
-const c_1L = 1.191_042_953e-16
+const c_1L = 1.191_042_972e-16
 
 """Second radiation constant \$ hc / k\$ [m K]."""
-const c_2 = 1.438_777_36e-2
+const c_2 = 1.438_776_877e-2
+
+"""Stefan--Boltzmann constant [W m^-2 K^-4]."""
+const sigma_SB = 5.670_374_419e-8
+
+"""Boltzmann constant [J K^-1]."""
+const k_B = 1.380_649e-23
+
+"""Avogadro constant [mol^-1]."""
+const N_A = 6.022_140_76e23
 
 """Molar gas constant [J mol^-1 K^-1]."""
-const R = 8.314_4598
+const R = 8.314_462_618
+
+"""Standard atmospheric pressure [Pa]."""
+const atm = 1.013_25e5
 
 """Standard acceleration of gravity [m s^-2]."""
 const g = 9.806_65
 
-"""Standard atmosphere [Pa]."""
-const atm = 1.01_325e5
-
 """Zero Celsius [K]."""
 const T_0 = 273.15
 
-"""Von Kármán constant [-]."""
+"""Von Kármán's constant [-]."""
 const kappa = 0.40
 
 """Molar mass of water [kg mol^-1]."""
@@ -97,8 +107,8 @@ const cp_d = 1.004e3 * M_d
 
 """A dictionary of physical constants."""
 const constants = Dict{String, Float64}(
-    "speed of light in vacuum" => c,
-    "Plack constant" => h,
+    "speed of light" => c,
+    "Planck constant" => h,
     "Avogadro constant" => N_A,
     "Boltzmann constant" => k_B,
     "Stefan-Boltzmann constant" => sigma_SB,
