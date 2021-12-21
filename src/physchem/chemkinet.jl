@@ -5,6 +5,8 @@ Types
 
 * [`TempDep`](@ref)
 * [`TempDepQ10`](@ref)
+* [`TempDepArrhenius`](@ref)
+* [`TempDepEnzyme`](@ref)
 
 Functions
 
@@ -12,6 +14,7 @@ Functions
 * [`q10_temp_dep`](@ref)
 * [`enzyme_temp_dep`](@ref)
 * [`enzyme_temp_opt`](@ref)
+* [`eval_temp_dep`](@ref)
 """
 module ChemKinet
 
@@ -124,7 +127,7 @@ end
 
 """
 A helper function to calculate the enzyme reaction rate at a given temperature
-(`temp`) in an _arbitrary unit_.
+(`temp`) in an arbitrary unit.
 
 ```math
 f(T) = \\dfrac{\\exp\\left(-\\dfrac{\\Delta G_\\mathrm{a}}{R T}\\right)}{
@@ -179,14 +182,14 @@ optimum.
 
 * [JEW42] Johnson, F. H., Eyring, H., and Williams, R. W. (1942). The nature of
   enzyme inhibitions in bacterial luminescence: sulfanilamide, urethane,
-  temperature and pressure. *J. Cellul. Comparat. Physiol.*, 20(3), 247--268.
+  temperature and pressure. _J. Cellul. Comparat. Physiol._, 20(3), 247--268.
   <https://doi.org/10.1002/jcp.1030200302>.
 * [SD77] Sharpe, P. J. H. and DeMichele, D. W. (1977). Reaction kinetics of
-  poikilotherm development. *J. Theoret. Biol.*, 64(4), 649--670.
+  poikilotherm development. _J. Theoret. Biol._, 64(4), 649--670.
   <https://doi.org/10.1016/0022-5193(77)90265-X>.
 * [PED04] Peterson, M. E., Eisenthal, R., Danson, M. J., Spence, A., and
   Daniel, R. M. (2004). A new intrinsic thermal parameter for enzymes reveals
-  true temperature optima. *J. Biol. Chem.*, 279(20), 20,717--20,722.
+  true temperature optima. _J. Biol. Chem._, 279(20), 20,717--20,722.
   <https://doi.org/10.1074/jbc.m309143200>.
 
 !!! note
