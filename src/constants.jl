@@ -1,7 +1,3 @@
-# Canopy.jl
-#
-# Copyright (c) 2018--2021 Wu Sun
-# License: MIT
 """
 A list of physical constants.
 
@@ -9,23 +5,24 @@ A list of physical constants.
 
 ## CODATA 2018 constants
 
-* [MNT16a] Mohr, P. J., Newell, D. B., & Taylor, B. N. (2016). CODATA
-  recommended values of the fundamental physical constants: 2014.
-  _Rev. Mod. Phys._ 88, 035009. <https://doi.org/10.1103/RevModPhys.88.035009>
-* [MNT16b] Mohr, P. J., Newell, D. B., and Taylor, B. N. (2016). CODATA
-  recommended values of the fundamental physical constants: 2014.
-  _J. Phys. Chem. Ref. Data_ 45, 043102. <https://doi.org/10.1063/1.4954402>
-* [MNTT18] Mohr, P. J., Newell, D. B., Taylor, B. N., and Tiesinga, E. (2018).
-  Data and analysis for the CODATA 2017 special fundamental constants
-  adjustment. _Metrologia_ 55, 125–146.
-  <https://doi.org/10.1088/1681-7575/aa99bc>
+* Mohr, P. J., Newell, D. B., & Taylor, B. N. (2016a). CODATA recommended
+  values of the fundamental physical constants: 2014. _Reviews of Modern
+  Physics_, _88_(3), 035009. <https://doi.org/10.1103/RevModPhys.88.035009>
+* Mohr, P. J., Newell, D. B., & Taylor, B. N. (2016b). CODATA Recommended
+  Values of the Fundamental Physical Constants: 2014. _Journal of Physical and
+  Chemical Reference Data_, _45_(4), 043102.
+  <https://doi.org/10.1063/1.4954402>
+* Mohr, P. J., Newell, D. B., Taylor, B. N., & Tiesinga, E. (2018). Data and
+  analysis for the CODATA 2017 special fundamental constants adjustment.
+  _Metrologia_, _55_(1), 125--146. <https://doi.org/10.1088/1681-7575/aa99bc>
 
 ## Molar masses
 
-* [HBCP] Rumble, J. (eds.) (2017). _CRC Handbook of Chemistry and Physics_
-  (98th ed.). CRC Press, Boca Raton, FL, USA. ISBN: 9781498784542.
-  Retrieved from <http://hbcponline.com/faces/contents/ContentsSearch.xhtml>
-  on 2018-06-12.
+* Rumble, J. R. (Ed.). (2017). _CRC handbook of chemistry and physics_ (98th
+  ed.). CRC Press, Taylor & Francis Group: Boca Raton, FL, USA. ISBN:
+  9781498784542.
+  Retrieved from <http://hbcponline.com/faces/contents/ContentsSearch.xhtml> on
+  2018-06-12.
 """
 module Constants
 
@@ -106,7 +103,7 @@ const cp_d = 1.004e3 * M_d
 # Note: using a constant value has less than 2% error between -40 and 60°C
 
 """A dictionary of physical constants."""
-const constants = Dict{String, Float64}(
+const constants = Dict{String,Float64}(
     "speed of light" => c,
     "Planck constant" => h,
     "Avogadro constant" => N_A,
@@ -123,6 +120,7 @@ const constants = Dict{String, Float64}(
     "molar mass of water" => M_w,
     "molar mass of CO2" => M_c,
     "molar mass of dry air" => M_d,
-    "molar isobaric specific heat capacity of dry air" => cp_d)
+    "molar isobaric specific heat capacity of dry air" => cp_d,
+)
 
 end  # module

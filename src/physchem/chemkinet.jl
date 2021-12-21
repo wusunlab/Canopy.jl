@@ -180,17 +180,17 @@ optimum.
 
 # References
 
-* [JEW42] Johnson, F. H., Eyring, H., and Williams, R. W. (1942). The nature of
-  enzyme inhibitions in bacterial luminescence: sulfanilamide, urethane,
-  temperature and pressure. _J. Cellul. Comparat. Physiol._, 20(3), 247--268.
-  <https://doi.org/10.1002/jcp.1030200302>.
-* [SD77] Sharpe, P. J. H. and DeMichele, D. W. (1977). Reaction kinetics of
-  poikilotherm development. _J. Theoret. Biol._, 64(4), 649--670.
-  <https://doi.org/10.1016/0022-5193(77)90265-X>.
-* [PED04] Peterson, M. E., Eisenthal, R., Danson, M. J., Spence, A., and
-  Daniel, R. M. (2004). A new intrinsic thermal parameter for enzymes reveals
-  true temperature optima. _J. Biol. Chem._, 279(20), 20,717--20,722.
-  <https://doi.org/10.1074/jbc.m309143200>.
+* Johnson, F. H., Eyring, H., & Williams, R. W. (1942). The nature of enzyme
+  inhibitions in bacterial luminescence: sulfanilamide, urethane, temperature
+  and pressure. _Journal of Cellular and Comparative Physiology_, _20_(3),
+  247--268. <https://doi.org/10.1002/jcp.1030200302>
+* Peterson, M. E., Eisenthal, R., Danson, M. J., Spence, A., & Daniel, R. M.
+  (2004). A new intrinsic thermal parameter for enzymes reveals true
+  temperature optima. _Journal of Biological Chemistry_, _279_(20),
+  20,717--20,722. <https://doi.org/10.1074/jbc.M309143200>
+* Sharpe, P. J. H., & DeMichele, D. W. (1977). Reaction kinetics of
+  poikilotherm development. _Journal of Theoretical Biology_, _64_(4),
+  649--670. <https://doi.org/10.1016/0022-5193(77)90265-X>
 
 !!! note
 
