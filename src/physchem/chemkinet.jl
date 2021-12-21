@@ -1,10 +1,17 @@
 """
 Basic chemical kinetics.
 
+Types
+
+* [`TempDep`](@ref)
+* [`TempDepQ10`](@ref)
+
+Functions
+
 * [`arrhenius`](@ref)
 * [`q10_temp_dep`](@ref)
 * [`enzyme_temp_dep`](@ref)
-* [`enzyme_temp_optimum`](@ref)
+* [`enzyme_temp_opt`](@ref)
 """
 module ChemKinet
 
@@ -12,12 +19,52 @@ include("../docstring_style.jl")
 
 using Canopy.Constants: R
 
-export arrhenius, q10_temp_dep, enzyme_temp_dep, enzyme_temp_optimum
+export TempDep,
+    TempDepQ10,
+    TempDepArrhenius,
+    TempDepEnzyme,
+    arrhenius,
+    q10_temp_dep,
+    enzyme_temp_dep,
+    enzyme_temp_opt,
+    eval_temp_dep
+
+"""A abstract type for structs of temperature dependence parameters."""
+abstract type TempDep end
+
+"""
+\$Q_{10}\$ temperature dependence parameters.
+
+# Fields
+
+* `q10`: The \$Q_{10}\$ parameter in [`q10_temp_dep`](@ref), dimensionless.
+* `temp_ref`: Reference temperature [K].
+* `v_max_ref`: Reaction rate at the reference temperature, arbitrary unit.
+"""
+struct TempDepQ10
+    q10::Number
+    temp_ref::Number
+    v_max_ref::Number
+end
+
+struct TempDepArrhenius
+    e_act::Number
+    temp_ref::Number
+    v_max_ref::Number
+end
+
+struct TempDepEnzyme
+    delta_G_a::Number
+    delta_H_d::Number
+    delta_S_d::Number
+    temp_ref::Number
+    v_max_ref::Number
+end
 
 """
 Calculate the ratio of reaction rate at a given temperature (`temp`) to that at
 a reference temperature (`temp_ref`) using the Arrhenius function. The
-activation energy is given by `E_act`.
+activation energy is given by `e_act`.
 
 ```math
 \\dfrac{k}{k_\\mathrm{ref}} = \\exp\\left[ -\\dfrac{E_\\mathrm{act}}{R} \\cdot
@@ -31,8 +78,8 @@ julia> arrhenius(5e4, 298.15, 283.15)
 0.3435224255653669
 ```
 """
-function arrhenius(E_act, temp_ref, temp)
-    exp(E_act * (temp - temp_ref) / (R * temp_ref * temp))
+function arrhenius(e_act, temp_ref, temp)
+    exp(e_act * (temp - temp_ref) / (R * temp_ref * temp))
 end
 
 """
@@ -68,11 +115,11 @@ f(T) = \\dfrac{\\exp\\left(-\\dfrac{\\Delta G_\\mathrm{a}}{R T}\\right)}{
 
 # Arguments
 
-* `Delta_G_a`: The standard Gibbs free energy of activation of the active state
+* `delta_G_a`: The standard Gibbs free energy of activation of the active state
   of the enzyme [J mol^-1].
-* `Delta_H_d`: The standard enthalpy change when the enzyme switches from the
+* `delta_H_d`: The standard enthalpy change when the enzyme switches from the
   active to the deactivated state [J mol^-1].
-* `Delta_S_d`: The standard entropy change when the enzyme switches from the
+* `delta_S_d`: The standard entropy change when the enzyme switches from the
   active to the deactivated state [J mol^-1 K^-1].
 * `temp`: Current temperature [K].
 
@@ -81,9 +128,9 @@ f(T) = \\dfrac{\\exp\\left(-\\dfrac{\\Delta G_\\mathrm{a}}{R T}\\right)}{
     This function is reserved for internal calls. Use
     [`enzyme_temp_dep`](@ref) for calculation.
 """
-function f_enzyme_temp_dep(Delta_G_a, Delta_H_d, Delta_S_d, temp)
-    exp(-Delta_G_a / (R * temp)) /
-    (1.0 + exp((Delta_S_d - Delta_H_d / temp) / R))
+function f_enzyme_temp_dep(delta_G_a, delta_H_d, delta_S_d, temp)
+    exp(-delta_G_a / (R * temp)) /
+    (1.0 + exp((delta_S_d - delta_H_d / temp) / R))
 end
 
 """
@@ -100,11 +147,11 @@ optimum.
 
 # Arguments
 
-* `Delta_G_a`: The standard Gibbs free energy of activation of the active state
+* `delta_G_a`: The standard Gibbs free energy of activation of the active state
   of the enzyme [J mol^-1].
-* `Delta_H_d`: The standard enthalpy change when the enzyme switches from the
+* `delta_H_d`: The standard enthalpy change when the enzyme switches from the
   active to the deactivated state [J mol^-1].
-* `Delta_S_d`: The standard entropy change when the enzyme switches from the
+* `delta_S_d`: The standard entropy change when the enzyme switches from the
   active to the deactivated state [J mol^-1 K^-1].
 * `temp_ref`: Reference temperature [K].
 * `temp`: Current temperature [K].
@@ -137,11 +184,11 @@ julia> enzyme_temp_dep(4e4, 2e5, 660.0, 298.15, 283.15)
 
 # See also
 
-[`enzyme_temp_optimum`](@ref)
+[`enzyme_temp_opt`](@ref)
 """
-function enzyme_temp_dep(Delta_G_a, Delta_H_d, Delta_S_d, temp_ref, temp)
-    f_enzyme_temp_dep(Delta_G_a, Delta_H_d, Delta_S_d, temp) /
-    f_enzyme_temp_dep(Delta_G_a, Delta_H_d, Delta_S_d, temp_ref)
+function enzyme_temp_dep(delta_G_a, delta_H_d, delta_S_d, temp_ref, temp)
+    f_enzyme_temp_dep(delta_G_a, delta_H_d, delta_S_d, temp) /
+    f_enzyme_temp_dep(delta_G_a, delta_H_d, delta_S_d, temp_ref)
 end
 
 """
@@ -155,17 +202,17 @@ T_\\mathrm{opt} = \\dfrac{\\Delta H_\\mathrm{d}}{
 
 # Arguments
 
-* `Delta_G_a`: The standard Gibbs free energy of activation of the active state
+* `delta_G_a`: The standard Gibbs free energy of activation of the active state
   of the enzyme [J mol^-1].
-* `Delta_H_d`: The standard enthalpy change when the enzyme switches from the
+* `delta_H_d`: The standard enthalpy change when the enzyme switches from the
   active to the deactivated state [J mol^-1].
-* `Delta_S_d`: The standard entropy change when the enzyme switches from the
+* `delta_S_d`: The standard entropy change when the enzyme switches from the
   active to the deactivated state [J mol^-1 K^-1].
 
 # Examples
 
 ```jldoctest
-julia> enzyme_temp_optimum(4e4, 2e5, 660.0)
+julia> enzyme_temp_opt(4e4, 2e5, 660.0)
 297.8289937283252
 ```
 
@@ -173,8 +220,21 @@ julia> enzyme_temp_optimum(4e4, 2e5, 660.0)
 
 [`enzyme_temp_dep`](@ref)
 """
-function enzyme_temp_optimum(Delta_G_a, Delta_H_d, Delta_S_d)
-    Delta_H_d / (Delta_S_d + R * log(Delta_H_d / Delta_G_a - 1.0))
+function enzyme_temp_opt(delta_G_a, delta_H_d, delta_S_d)
+    delta_H_d / (delta_S_d + R * log(delta_H_d / delta_G_a - 1.0))
+end
+
+function eval_temp_dep(p::TempDepQ10, temp)
+    p.v_max_ref * q10_temp_dep(p.q10, p.temp_ref, temp)
+end
+
+function eval_temp_dep(p::TempDepArrhenius, temp)
+    p.v_max_ref * arrhenius(p.e_act, p.temp_ref, temp)
+end
+
+function eval_temp_dep(p::TempDepEnzyme, temp)
+    p.v_max_ref *
+    enzyme_temp_dep(p.delta_G_a, p.delta_H_d, p.delta_S_d, p.temp_ref, temp)
 end
 
 end  # module
