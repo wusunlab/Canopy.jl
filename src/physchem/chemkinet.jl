@@ -33,7 +33,7 @@ export TempDep,
 abstract type TempDep end
 
 """
-\$Q_{10}\$ temperature dependence parameters.
+Exponential (\$Q_{10}\$) temperature dependence parameters.
 
 # Fields
 
@@ -47,12 +47,31 @@ struct TempDepQ10
     v_max_ref::Number
 end
 
+"""
+Arrhenius temperature dependence parameters.
+
+# Fields
+
+* `e_act`: The activation energy [J mol^-1] in [`arrhenius`](@ref).
+* `temp_ref`: Reference temperature [K].
+* `v_max_ref`: Reaction rate at the reference temperature, arbitrary unit.
+"""
 struct TempDepArrhenius
     e_act::Number
     temp_ref::Number
     v_max_ref::Number
 end
 
+"""
+Enzyme optimum temperature dependence parameters.
+
+# Fields
+
+* `delta_G_a`, `delta_H_d`, `delta_S_d`: Enzyme energetic parameters in
+  [`enzyme_temp_dep`](@ref).
+* `temp_ref`: Reference temperature [K].
+* `v_max_ref`: Reaction rate at the reference temperature, arbitrary unit.
+"""
 struct TempDepEnzyme
     delta_G_a::Number
     delta_H_d::Number
@@ -192,7 +211,7 @@ function enzyme_temp_dep(delta_G_a, delta_H_d, delta_S_d, temp_ref, temp)
 end
 
 """
-Calculates the temperature optimum of an enzyme reaction [K].
+Calculate the temperature optimum of an enzyme reaction [K].
 
 ```math
 T_\\mathrm{opt} = \\dfrac{\\Delta H_\\mathrm{d}}{
@@ -224,6 +243,13 @@ function enzyme_temp_opt(delta_G_a, delta_H_d, delta_S_d)
     delta_H_d / (delta_S_d + R * log(delta_H_d / delta_G_a - 1.0))
 end
 
+"""
+Evaluate the reaction rate at a given temperature (`temp`). The temperature
+dependence of the reaction is characterized by a set of parameters (`p`), which
+can be one of the three types: [`TempDepQ10`](@ref),
+[`TempDepArrhenius`](@ref), and [`TempDepEnzyme`](@ref). This function is a
+unified interface to different temperature dependence functions.
+"""
 function eval_temp_dep(p::TempDepQ10, temp)
     p.v_max_ref * q10_temp_dep(p.q10, p.temp_ref, temp)
 end
