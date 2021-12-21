@@ -28,7 +28,7 @@ activation energy is given by `E_act`.
 
 ```jldoctest
 julia> arrhenius(5e4, 298.15, 283.15)
-0.3435223011604158
+0.3435224255653669
 ```
 """
 function arrhenius(E_act, temp_ref, temp)
@@ -132,7 +132,7 @@ optimum.
 
 ```jldoctest
 julia> enzyme_temp_dep(4e4, 2e5, 660.0, 298.15, 283.15)
-0.539321882992312
+0.5393220862804745
 ```
 
 # See also
@@ -140,8 +140,8 @@ julia> enzyme_temp_dep(4e4, 2e5, 660.0, 298.15, 283.15)
 [`enzyme_temp_optimum`](@ref)
 """
 function enzyme_temp_dep(Delta_G_a, Delta_H_d, Delta_S_d, temp_ref, temp)
-    f_enzyme_temp_dep(temp, Delta_G_a, Delta_H_d, Delta_S_d) /
-    f_enzyme_temp_dep(temp_ref, Delta_G_a, Delta_H_d, Delta_S_d)
+    f_enzyme_temp_dep(Delta_G_a, Delta_H_d, Delta_S_d, temp) /
+    f_enzyme_temp_dep(Delta_G_a, Delta_H_d, Delta_S_d, temp_ref)
 end
 
 """
@@ -166,7 +166,7 @@ T_\\mathrm{opt} = \\dfrac{\\Delta H_\\mathrm{d}}{
 
 ```jldoctest
 julia> enzyme_temp_optimum(4e4, 2e5, 660.0)
-297.8289954609335
+297.8289937283252
 ```
 
 # See also
