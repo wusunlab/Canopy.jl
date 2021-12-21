@@ -12,15 +12,12 @@ include("../docstring_style.jl")
 
 using Canopy.Constants: R
 
-export arrhenius,
-    q10_temp_dep,
-    enzyme_temp_dep,
-    enzyme_temp_optimum
+export arrhenius, q10_temp_dep, enzyme_temp_dep, enzyme_temp_optimum
 
 """
 Calculate the ratio of reaction rate at a given temperature (`temp`) to that at
-a reference temperature (`ref`) using the Arrhenius function. The activation
-energy is given in `E_act`.
+a reference temperature (`temp_ref`) using the Arrhenius function. The
+activation energy is given by `E_act`.
 
 ```math
 \\dfrac{k}{k_\\mathrm{ref}} = \\exp\\left[ -\\dfrac{E_\\mathrm{act}}{R} \\cdot
@@ -30,15 +27,17 @@ energy is given in `E_act`.
 # Examples
 
 ```jldoctest
-julia> arrhenius(283.15, 298.15, 5e4)
+julia> arrhenius(5e4, 298.15, 283.15)
 0.3435223011604158
 ```
 """
-arrhenius(temp, ref, E_act) = exp(E_act * (temp - ref) / (R * ref * temp))
+function arrhenius(E_act, temp_ref, temp)
+    exp(E_act * (temp - temp_ref) / (R * temp_ref * temp))
+end
 
 """
 Calculate the ratio of reaction rate at a given temperature (`temp`) to that at
-a reference temperature (`ref`) using an exponential function defined by a
+a reference temperature (`temp_ref`) using an exponential function defined by a
 `q10` value.
 
 ```math
@@ -49,15 +48,17 @@ a reference temperature (`ref`) using an exponential function defined by a
 # Examples
 
 ```jldoctest
-julia> q10_temp_dep(283.15, 298.15, 2.)
+julia> q10_temp_dep(2.0, 298.15, 283.15)
 0.3535533905932738
 ```
 """
-q10_temp_dep(temp, ref, q10) = q10 ^ (0.1 * (temp - ref))
+function q10_temp_dep(q10, temp_ref, temp)
+    q10^(0.1 * (temp - temp_ref))
+end
 
 """
 A helper function to calculate the enzyme reaction rate at a given temperature
-(`temp`) in an *arbitrary unit*.
+(`temp`) in an _arbitrary unit_.
 
 ```math
 f(T) = \\dfrac{\\exp\\left(-\\dfrac{\\Delta G_\\mathrm{a}}{R T}\\right)}{
@@ -67,26 +68,27 @@ f(T) = \\dfrac{\\exp\\left(-\\dfrac{\\Delta G_\\mathrm{a}}{R T}\\right)}{
 
 # Arguments
 
-* `temp`: Current temperature [K].
 * `Delta_G_a`: The standard Gibbs free energy of activation of the active state
   of the enzyme [J mol^-1].
 * `Delta_H_d`: The standard enthalpy change when the enzyme switches from the
   active to the deactivated state [J mol^-1].
 * `Delta_S_d`: The standard entropy change when the enzyme switches from the
   active to the deactivated state [J mol^-1 K^-1].
+* `temp`: Current temperature [K].
 
 !!! note
 
     This function is reserved for internal calls. Use
     [`enzyme_temp_dep`](@ref) for calculation.
 """
-f_enzyme_temp_dep(temp, Delta_G_a, Delta_H_d, Delta_S_d) =
-    exp(- Delta_G_a / (R * temp)) /
-    (1. + exp((Delta_S_d - Delta_H_d / temp) / R))
+function f_enzyme_temp_dep(Delta_G_a, Delta_H_d, Delta_S_d, temp)
+    exp(-Delta_G_a / (R * temp)) /
+    (1.0 + exp((Delta_S_d - Delta_H_d / temp) / R))
+end
 
 """
 Calculate the ratio of reaction rate at a given temperature (`temp`) to that at
-a reference temperature (`ref`) for an enzyme reaction with a temperature
+a reference temperature (`temp_ref`) for an enzyme reaction with a temperature
 optimum.
 
 ```math
@@ -98,14 +100,14 @@ optimum.
 
 # Arguments
 
-* `temp`: Current temperature [K].
-* `ref`: Reference temperature [K].
 * `Delta_G_a`: The standard Gibbs free energy of activation of the active state
   of the enzyme [J mol^-1].
 * `Delta_H_d`: The standard enthalpy change when the enzyme switches from the
   active to the deactivated state [J mol^-1].
 * `Delta_S_d`: The standard entropy change when the enzyme switches from the
   active to the deactivated state [J mol^-1 K^-1].
+* `temp_ref`: Reference temperature [K].
+* `temp`: Current temperature [K].
 
 # References
 
@@ -129,7 +131,7 @@ optimum.
 # Examples
 
 ```jldoctest
-julia> enzyme_temp_dep(283.15, 298.15, 4e4, 2e5, 660.)
+julia> enzyme_temp_dep(4e4, 2e5, 660.0, 298.15, 283.15)
 0.539321882992312
 ```
 
@@ -137,9 +139,10 @@ julia> enzyme_temp_dep(283.15, 298.15, 4e4, 2e5, 660.)
 
 [`enzyme_temp_optimum`](@ref)
 """
-enzyme_temp_dep(temp, ref, Delta_G_a, Delta_H_d, Delta_S_d) =
+function enzyme_temp_dep(Delta_G_a, Delta_H_d, Delta_S_d, temp_ref, temp)
     f_enzyme_temp_dep(temp, Delta_G_a, Delta_H_d, Delta_S_d) /
-    f_enzyme_temp_dep(ref, Delta_G_a, Delta_H_d, Delta_S_d)
+    f_enzyme_temp_dep(temp_ref, Delta_G_a, Delta_H_d, Delta_S_d)
+end
 
 """
 Calculates the temperature optimum of an enzyme reaction [K].
@@ -162,7 +165,7 @@ T_\\mathrm{opt} = \\dfrac{\\Delta H_\\mathrm{d}}{
 # Examples
 
 ```jldoctest
-julia> enzyme_temp_optimum(4e4, 2e5, 660.)
+julia> enzyme_temp_optimum(4e4, 2e5, 660.0)
 297.8289954609335
 ```
 
@@ -170,7 +173,8 @@ julia> enzyme_temp_optimum(4e4, 2e5, 660.)
 
 [`enzyme_temp_dep`](@ref)
 """
-enzyme_temp_optimum(Delta_G_a, Delta_H_d, Delta_S_d) =
-    Delta_H_d / (Delta_S_d + R * log(Delta_H_d / Delta_G_a - 1.))
+function enzyme_temp_optimum(Delta_G_a, Delta_H_d, Delta_S_d)
+    Delta_H_d / (Delta_S_d + R * log(Delta_H_d / Delta_G_a - 1.0))
+end
 
 end  # module
