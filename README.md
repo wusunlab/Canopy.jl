@@ -2,7 +2,7 @@
 
 [![Travis](https://travis-ci.org/wusunlab/Canopy.jl.svg?branch=master)](https://travis-ci.org/wusunlab/Canopy.jl)
 
-Wu Sun (wu.sun@ucla.edu)
+Wu Sun (wsun@carnegiescience.edu)
 
 A Julia package that provides functions used in biometeorology and land
 biosphere--atmosphere interactions.
@@ -20,7 +20,7 @@ gas fluxes, and in-canopy eddy transport, etc.
 
 ## Dependencies
 
-* Julia >= 0.7
+* Julia >= 1.0
 * DocStringExtensions
 
 ## Installation

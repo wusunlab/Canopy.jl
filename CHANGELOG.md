@@ -4,6 +4,12 @@ Notable changes to this project are documented here. The format is based on
 [Keep a Changelog](http://keepachangelog.com/en/1.0.0/). Versioning adheres to
 the [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.1.2 - [current]
+
+### Changed
+
+* Updated physical constants to CODATA 2018 values (`Canopy.Constants`).
+
 ## 0.1.1 - 2018-09-21
 
 ### Added
