@@ -1,13 +1,13 @@
-# Canopy.jl
+# Canopy.jl: A model for plant canopy exchange of energy, water, carbon, and trace gases [WIP]
 
-[![Travis](https://travis-ci.org/wusunlab/Canopy.jl.svg?branch=master)](https://travis-ci.org/wusunlab/Canopy.jl)
+![Build status](https://github.com/wusunlab/Canopy.jl/actions/workflows/ci.yml/badge.svg)
 
 Wu Sun (wsun@carnegiescience.edu)
 
 A Julia package that provides functions used in biometeorology and land
 biosphere--atmosphere interactions.
 
-**WARNING: Under construction! Feature not complete.**
+**WARNING: Under construction! Features not complete.**
 You may check the [Development Plan](./dev-plan.md) for the current progress.
 
 ## Features (in planning)
