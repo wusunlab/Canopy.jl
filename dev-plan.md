@@ -2,40 +2,59 @@
 
 A laundry list of things to implement before version 1.0.
 
-<!-- TOC -->
+- [Development Plan (Tentative)](#development-plan-tentative)
+  - [Physical constants (`Canopy.Constants`)](#physical-constants-canopyconstants)
+  - [Water and water vapor properties (`Canopy.Water`)](#water-and-water-vapor-properties-canopywater)
+  - [Dry and moist air properties (`Canopy.Air`)](#dry-and-moist-air-properties-canopyair)
+  - [Physical chemistry](#physical-chemistry)
+    - [Chemical kinetics](#chemical-kinetics)
+    - [Gas solubility](#gas-solubility)
+    - [Reactions](#reactions)
+  - [Radiative transfer (`Canopy.RadTrans`)](#radiative-transfer-canopyradtrans)
+    - [Blackbody radiation](#blackbody-radiation)
+    - [Solar radiation and position](#solar-radiation-and-position)
+    - [Canopy 1-D radiative transfer](#canopy-1-d-radiative-transfer)
+  - [Transfer coefficients (`Canopy.Transfer`)](#transfer-coefficients-canopytransfer)
+    - [Momentum transfer](#momentum-transfer)
+    - [Heat transfer](#heat-transfer)
+    - [Mass transfer](#mass-transfer)
+  - [Water cycle](#water-cycle)
+  - [Leaf processes](#leaf-processes)
+    - [Leaf physical properties](#leaf-physical-properties)
+    - [Leaf energy balance](#leaf-energy-balance)
+    - [Transpiration](#transpiration)
+    - [Photosynthetic light harvesting and electron transport](#photosynthetic-light-harvesting-and-electron-transport)
+    - [Photosynthetic carbon assimilation](#photosynthetic-carbon-assimilation)
+      - [C<sub>3</sub> photosynthesis](#csub3sub-photosynthesis)
+      - [C<sub>4</sub> photosynthesis](#csub4sub-photosynthesis)
+      - [CAM photosynthesis](#cam-photosynthesis)
+      - [C<sub>2</sub> and intermediate-type photosynthesis](#csub2sub-and-intermediate-type-photosynthesis)
+    - [Leaf respiration](#leaf-respiration)
+      - [Photorespiration](#photorespiration)
+      - [Mitochondrial respiration](#mitochondrial-respiration)
+    - [Stomatal conductance](#stomatal-conductance)
+      - [Empirical stomatal conductance models](#empirical-stomatal-conductance-models)
+      - [Optimization-based stomatal conductance models](#optimization-based-stomatal-conductance-models)
+    - [Mesophyll conductance](#mesophyll-conductance)
+      - [Leaf hydraulics](#leaf-hydraulics)
+    - [Leaf optics](#leaf-optics)
+    - [Chlorophyll fluorescence](#chlorophyll-fluorescence)
+    - [Leaf exchange of trace gases and isotope tracers](#leaf-exchange-of-trace-gases-and-isotope-tracers)
+      - [Carbonyl sulfide](#carbonyl-sulfide)
+      - [Ozone](#ozone)
+      - [Ammonia](#ammonia)
+      - [Biogenic volatile organic compounds](#biogenic-volatile-organic-compounds)
+      - [Carbon and oxygen stable isotopes](#carbon-and-oxygen-stable-isotopes)
+  - [Canopy processes](#canopy-processes)
+  - [Soil processes](#soil-processes)
+  - [Units](#units)
 
-- [1. Physical constants (`Canopy.Constants`)](#1-physical-constants-canopyconstants)
-- [2. Water and water vapor properties (`Canopy.Water`)](#2-water-and-water-vapor-properties-canopywater)
-- [3. Dry and moist air properties (`Canopy.Air`)](#3-dry-and-moist-air-properties-canopyair)
-- [4. Physical chemistry](#4-physical-chemistry)
-    - [4.1 Chemical kinetics](#41-chemical-kinetics)
-    - [4.2 Gas solubility](#42-gas-solubility)
-    - [4.3 Reactions](#43-reactions)
-- [5. Radiative transfer (`Canopy.RadTrans`)](#5-radiative-transfer-canopyradtrans)
-    - [5.1 Blackbody radiation](#51-blackbody-radiation)
-    - [5.2 Solar radiation and position](#52-solar-radiation-and-position)
-    - [5.3 Canopy 1-D radiative transfer](#53-canopy-1-d-radiative-transfer)
-- [6. Transfer coefficients (`Canopy.Transfer`)](#6-transfer-coefficients-canopytransfer)
-    - [6.1 Momentum transfer](#61-momentum-transfer)
-    - [6.2 Heat transfer](#62-heat-transfer)
-    - [6.3 Mass transfer](#63-mass-transfer)
-- [7. Terrestrial water cycle](#7-terrestrial-water-cycle)
-- [8. Leaf and canopy processes](#8-leaf-and-canopy-processes)
-    - [8.1 Leaf energy balance](#81-leaf-energy-balance)
-    - [8.2 Photosynthesis](#82-photosynthesis)
-    - [8.3 Stomatal conductance](#83-stomatal-conductance)
-    - [8.4 Leaf and xylem water potential](#84-leaf-and-xylem-water-potential)
-- [9. Soil processes](#9-soil-processes)
-- [10. Units](#10-units)
-
-<!-- /TOC -->
-
-## 1. Physical constants (`Canopy.Constants`)
+## Physical constants (`Canopy.Constants`)
 
 * [x] Obtain necessary constants from the [2018 CODATA Fundamental Physical
   Constants](https://physics.nist.gov/cuu/Constants/index.html). [2021-07-06]
 
-## 2. Water and water vapor properties (`Canopy.Water`)
+## Water and water vapor properties (`Canopy.Water`)
 
 * [x] `water_density`: Water density. [2018-08-10]
 * [x] `water_dissoc`: Dissociation (a.k.a. self-ionization) coefficient of
@@ -53,15 +72,15 @@ A laundry list of things to implement before version 1.0.
 * [x] `vapor_deficit_mole_frac`: Water vapor deficit in mole fraction.
   [2018-08-10]
 
-## 3. Dry and moist air properties (`Canopy.Air`)
+## Dry and moist air properties (`Canopy.Air`)
 
 * [x] `air_molar`: Calculate the molar concentration of air [mol m^-3].
   [2018-08-12]
 * [x] `air_density`: Calculate air density [kg m^-3]. [2018-08-12]
 
-## 4. Physical chemistry
+## Physical chemistry
 
-### 4.1 Chemical kinetics
+### Chemical kinetics
 
 * [x] `arrhenius`: Arrhenius equation for temperature dependence. [2018-09-20]
 * [x] `q10_temp_dep`: *Q*<sub>10</sub> (exponential) type equation for
@@ -71,22 +90,22 @@ A laundry list of things to implement before version 1.0.
 * [x] `enzyme_temp_optimum`: Calculate the temperature optimum of an enzyme
   reaction. [2018-09-20]
 
-### 4.2 Gas solubility
+### Gas solubility
 
 * [ ] `solub_gas`
 * [x] `solub_co2`: CO<sub>2</sub> solubility in fresh water or seawater.
   [2018-09-21]
 * [x] `solub_cos`: COS solubility in pure water. [2018-09-21]
 
-### 4.3 Reactions
+### Reactions
 
 * [x] `hydrolysis_cos` [2018-09-20]
 
 (More to be added)
 
-## 5. Radiative transfer (`Canopy.RadTrans`)
+## Radiative transfer (`Canopy.RadTrans`)
 
-### 5.1 Blackbody radiation
+### Blackbody radiation
 
 * [x] `ephoton`: Calculate the energy of one photon. [2018-08-23]
 * [x] `energy2photon`: Convert energy flux density to photon flux density.
@@ -95,7 +114,7 @@ A laundry list of things to implement before version 1.0.
 * [x] `stefan_boltzmann`: Stefan--Boltzmann law. [2018-08-23]
 * [x] `blackbody_temp`: Calculate blackbody temperature. [2018-08-23]
 
-### 5.2 Solar radiation and position
+### Solar radiation and position
 
 * [x] `eccentricity`: Calculate the eccentricity of the earth's orbit.
   [2018-09-20]
@@ -103,17 +122,17 @@ A laundry list of things to implement before version 1.0.
 * [x] `atmos_refrac`: Calculate atmospheric refraction effect on the solar
   zenith angle. [2018-09-20]
 
-### 5.3 Canopy 1-D radiative transfer
+### Canopy 1-D radiative transfer
 
-## 6. Transfer coefficients (`Canopy.Transfer`)
+## Transfer coefficients (`Canopy.Transfer`)
 
-### 6.1 Momentum transfer
+### Momentum transfer
 
 * [x] `dyn_visc_dryair`: Dynamic viscosity of dry air. [2018-09-24]
 * [x] `dyn_visc_vapor`: Dynamic viscosity of water vapor. [2018-09-24]
 * [x] `dyn_visc_moistair`: Dynamic viscosity of moist air. [2018-09-24]
 
-### 6.2 Heat transfer
+### Heat transfer
 
 * [x] `therm_cond_dryair`: Thermal conductivity of dry air. [2018-09-24]
 * [x] `heat_cap_dryair`: Isobaric heat capacity of dry air. [2018-09-24]
@@ -126,7 +145,7 @@ A laundry list of things to implement before version 1.0.
 * [x] `therm_diff_moistair`: Thermal diffusivity of moist air. [2018-09-24]
 * [x] `prandtl`: Prandtl number of moist air. [2018-09-24]
 
-### 6.3 Mass transfer
+### Mass transfer
 
 * [x] `diffus_air`: Gas diffusivity in air. [2018-09-21]
 * [x] `diffus_water`: Gas diffusivity in water. [2018-09-21]
@@ -134,7 +153,7 @@ A laundry list of things to implement before version 1.0.
 * [x] `diffus_soil_water`: Gas diffusivity in soil water. [2018-09-21]
 * [x] `diffus_soil`: Dual-phase gas diffusivity in soil. [2018-09-21]
 
-## 7. Terrestrial water cycle
+## Water cycle
 
 * [x] `psychromet`: Calculate the psychrometric constant. [2018-09-25]
 * [x] `penman_monteith`: Calculate latent heat flux or evapotranspiration using
@@ -142,9 +161,11 @@ A laundry list of things to implement before version 1.0.
 * [x] `cond_sfc`: Calculate canopy surface conductance from the inverted
   Penman--Monteith equation. [2018-09-25]
 
-## 8. Leaf and canopy processes
+## Leaf processes
 
-### 8.1 Leaf energy balance
+### Leaf physical properties
+
+### Leaf energy balance
 
 * [ ] `bl_cond_heat`
 * [ ] `bl_cond_vapor`
@@ -155,15 +176,104 @@ A laundry list of things to implement before version 1.0.
 * [ ] `latent_heat`
 * [ ] `energy_imbalance`
 
-### 8.2 Photosynthesis
+### Transpiration
 
-### 8.3 Stomatal conductance
+### Photosynthetic light harvesting and electron transport
 
-### 8.4 Leaf and xylem water potential
+### Photosynthetic carbon assimilation
 
-## 9. Soil processes
+#### C<sub>3</sub> photosynthesis
 
-## 10. Units
+#### C<sub>4</sub> photosynthesis
+
+#### CAM photosynthesis
+
+#### C<sub>2</sub> and intermediate-type photosynthesis
+
+### Leaf respiration
+
+#### Photorespiration
+
+#### Mitochondrial respiration
+
+### Stomatal conductance
+
+#### Empirical stomatal conductance models
+
+#### Optimization-based stomatal conductance models
+
+### Mesophyll conductance
+
+#### Leaf hydraulics
+
+### Leaf optics
+
+### Chlorophyll fluorescence
+
+### Leaf exchange of trace gases and isotope tracers
+
+#### Carbonyl sulfide
+
+#### Ozone
+
+#### Ammonia
+
+#### Biogenic volatile organic compounds
+
+#### Carbon and oxygen stable isotopes
+
+## Canopy processes
+
+## Soil processes
+
+## Units
 
 * [x] `c2k`: Convert Celsius to Kelvin. [2018-09-21]
 * [x] `k2c`: Convert Kelvin to Celsius. [2018-09-21]
+
+<style type="text/css">
+  body {
+    margin: auto;
+    max-width: 44em;
+    font-family: Calibri, sans-serif;
+    font-size: 18pt;
+  }
+
+  /* automatic heading numbering */
+  h1 { counter-reset: h2counter; }
+  h2 { counter-reset: h3counter; }
+  h3 { counter-reset: h4counter; }
+  h4 { counter-reset: h5counter; }
+  h5 { counter-reset: h6counter; }
+  h6 { }
+  h2:before {
+    counter-increment: h2counter;
+    content: counter(h2counter) ".\0000a0\0000a0";
+  }
+  h3:before {
+    counter-increment: h3counter;
+    content: counter(h2counter) "."
+             counter(h3counter) ".\0000a0\0000a0";
+  }
+  h4:before {
+    counter-increment: h4counter;
+    content: counter(h2counter) "."
+             counter(h3counter) "."
+             counter(h4counter) ".\0000a0\0000a0";
+  }
+  h5:before {
+    counter-increment: h5counter;
+    content: counter(h2counter) "."
+             counter(h3counter) "."
+             counter(h4counter) "."
+             counter(h5counter) ".\0000a0\0000a0";
+  }
+  h6:before {
+    counter-increment: h6counter;
+    content: counter(h2counter) "."
+             counter(h3counter) "."
+             counter(h4counter) "."
+             counter(h5counter) "."
+             counter(h6counter) ".\0000a0\0000a0";
+  }
+</style>
