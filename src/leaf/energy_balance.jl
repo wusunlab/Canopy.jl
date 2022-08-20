@@ -5,7 +5,6 @@ Leaf energy balance.
 * [`bl_cond_vapor`](@ref)
 * [`PAR_to_shortwave`](@ref)
 * [`sensible_heat`](@ref)
-* [`leaf_vapor_deficit`](@ref)
 * [`latent_heat`](@ref)
 * [`energy_imbalance`](@ref)
 
@@ -38,13 +37,12 @@ using Canopy.Transfer:
     therm_diff_moistair,
     diffus_air,
     heat_cap_moistair
-using Canopy.Leaf.Transpiration: transpiration
+using Canopy.Leaf.Transpiration: leaf_vapor_deficit, transpiration
 
 export bl_cond_heat,
     bl_cond_vapor,
     PAR_to_shortwave,
     sensible_heat,
-    leaf_vapor_deficit,
     latent_heat,
     energy_imbalance
 
@@ -167,19 +165,6 @@ function sensible_heat(temp, temp_leaf, cp_a, g_bh)
 end
 
 """
-Calculate leaf-to-air vapor pressure deficit [Pa].
-
-# Arguments
-
-* `temp`: Air temperature [K].
-* `temp_leaf`: Leaf temperature [K].
-* `rh`: Relative humidity [0--1].
-"""
-function leaf_vapor_deficit(temp, temp_leaf, rh)
-    e_sat(temp_leaf) - e_sat(temp_air) * rh
-end
-
-"""
 Calculate latent heat transfer rate at the leaf surface [W m^-2].
 
 ```math
@@ -230,7 +215,7 @@ function energy_imbalance(
     g_sw,
 )
     R_net = R_sw - em_leaf * stefan_boltzmann(temp_leaf)
-    VPD_leaf = leaf_vapor_deficit(temp, temp_leaf, rh)
+    vpd_leaf = leaf_vapor_deficit(temp, temp_leaf, rh)
     cp_a = heat_cap_moistair(temp_leaf, pressure, RH)
     g_bh = bl_cond_heat(pressure, temp, rh, wind_speed, d_leaf)
     g_bw = bl_cond_vapor(pressure, temp, rh, wind_speed, d_leaf)

@@ -1,6 +1,7 @@
 """
 Leaf transpiration.
 
+* [`leaf_vapor_deficit`](@ref)
 * [`total_cond_vapor`](@ref)
 * [`transpiration`](@ref)
 """
@@ -8,7 +9,22 @@ module Transpiration
 
 include("../docstring_style.jl")
 
-export total_cond_vapor, transpiration
+using Canopy.Water: e_sat
+
+export leaf_vapor_deficit, total_cond_vapor, transpiration
+
+"""
+Calculate leaf-to-air vapor pressure deficit [Pa].
+
+# Arguments
+
+* `temp`: Air temperature [K].
+* `temp_leaf`: Leaf temperature [K].
+* `rh`: Relative humidity [0--1].
+"""
+function leaf_vapor_deficit(temp, temp_leaf, rh)
+    e_sat(temp_leaf) - e_sat(temp_air) * rh
+end
 
 """
 Calculate the total conductance to water vapor [mol m^-2 s^-1].
