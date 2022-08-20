@@ -55,8 +55,8 @@ where
 
 # Arguments
 
-* `assim`: CO<sub>2</sub> assimilation rate [µmol m^-2 s^-1];
-* `co2_s`: Leaf surface CO<sub>2</sub> mixing ratio [µmol mol^-1];
+* `assim`: CO2 assimilation rate [µmol m^-2 s^-1];
+* `co2_s`: Leaf surface CO2 mixing ratio [µmol mol^-1];
 * `h_s`: Leaf surface relative humidity [0--1];
 * `slope`: Ball--Berry slope [dimensionless];
 * `g_sw_min`: Minimum stomatal conductance [mol m^-2 s^-1].
@@ -107,8 +107,8 @@ where
 
 # Arguments
 
-* `assim`: CO<sub>2</sub> assimilation rate [µmol m^-2 s^-1];
-* `co2_s`: Leaf surface CO<sub>2</sub> mixing ratio [µmol mol^-1];
+* `assim`: CO2 assimilation rate [µmol m^-2 s^-1];
+* `co2_s`: Leaf surface CO2 mixing ratio [µmol mol^-1];
 * `vpd_leaf`: Leaf-to-air vapor pressure deficit [Pa];
 * `vpd_0`: A parameter for vapor pressure deficit dependence [Pa];
 * `slope`: Ball--Berry--Leuning slope [dimensionless];
@@ -136,10 +136,30 @@ Medlyn equation of stomatal conductance [mol m^-2 s^-1].
 The Medlyn equation is grounded in stomatal optimization theory and takes the
 form of an empirical equation of stomatal conductance.
 
+```math
+g_\\mathrm{s,W}
+= \\max\\left\\{
+    R_\\mathrm{W/C}\\left(1 + \\frac{g_1}{\\sqrt{D}}\\right)
+    \\frac{A_\\mathrm{n}}{c_\\mathrm{s}}, 0
+    \\right\\}
++ g_\\mathrm{s,W,min}
+```
+
+where
+
+* ``R_\\mathrm{W/C}`` is the ratio between stomatal conductances to water vapor
+  and CO2 [dimensionless];
+* ``g_1`` is the Medlyn slope parameter [Pa^0.5];
+* ``A_\\mathrm{n}`` is the net CO2 assimilation rate [µmol m^-2 s^-1];
+* ``c_\\mathrm{s}`` is the CO2 concentration at the leaf surface [µmol mol^-1];
+* ``D`` is the leaf-to-air vapor pressure deficit [Pa];
+* ``g_\\mathrm{s,W,min}`` is the minimum stomatal conductance to water vapor
+  [mol mol^-2 s^-1].
+
 # Arguments
 
-* `assim`: CO<sub>2</sub> assimilation rate [µmol m^-2 s^-1];
-* `co2_s`: Leaf surface CO<sub>2</sub> mixing ratio [µmol mol^-1];
+* `assim`: CO2 assimilation rate [µmol m^-2 s^-1];
+* `co2_s`: Leaf surface CO2 mixing ratio [µmol mol^-1];
 * `vpd_leaf`: Leaf-to-air vapor pressure deficit [Pa];
 * `slope`: Medlyn slope [Pa^0.5];
 * `g_sw_min`: Minimum stomatal conductance [mol m^-2 s^-1].
@@ -165,13 +185,13 @@ function stom_cond_medlyn(assim, co2_s, vpd_leaf, slope, g_sw_min)
 end
 
 """
-Calculate the total conductance to CO<sub>2</sub> [mol m^-2 s^-1].
+Calculate the total conductance to CO2 [mol m^-2 s^-1].
 
 # Arguments
 
 * `g_bw`: Leaf boundary layer conductance to water vapor [mol m^-2 s^-1];
 * `g_sw`: Stomatal conductance to water vapor [mol m^-2 s^-1];
-* `g_mc`: Mesophyll conductance to CO<sub>2</sub> [mol m^-2 s^-1].
+* `g_mc`: Mesophyll conductance to CO2 [mol m^-2 s^-1].
 """
 function total_cond_co2(g_bw, g_sw, g_mc)
     g_bc = g_bw / ratio_gb_co2
