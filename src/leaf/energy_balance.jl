@@ -1,12 +1,11 @@
 """
-Leaf energy balance module.
+Leaf energy balance.
 
 * [`bl_cond_heat`](@ref)
 * [`bl_cond_vapor`](@ref)
 * [`PAR_to_shortwave`](@ref)
 * [`sensible_heat`](@ref)
 * [`leaf_vapor_deficit`](@ref)
-* [`transpiration`](@ref)
 * [`latent_heat`](@ref)
 * [`energy_imbalance`](@ref)
 
@@ -39,14 +38,13 @@ using Canopy.Transfer:
     therm_diff_moistair,
     diffus_air,
     heat_cap_moistair
-using Canopy.Leaf.StomCond: total_cond_h2o  # TODO: TO BE IMPLEMENTED
+using Canopy.Leaf.Transpiration: transpiration
 
 export bl_cond_heat,
     bl_cond_vapor,
     PAR_to_shortwave,
     sensible_heat,
     leaf_vapor_deficit,
-    transpiration,
     latent_heat,
     energy_imbalance
 
@@ -179,33 +177,6 @@ Calculate leaf-to-air vapor pressure deficit [Pa].
 """
 function leaf_vapor_deficit(temp, temp_leaf, rh)
     e_sat(temp_leaf) - e_sat(temp_air) * rh
-end
-
-"""
-Calculate leaf water flux [mol m^-2 s^-1].
-
-```math
-F_\\mathrm{H_2O} = g_\\mathrm{tot,W} \\cdot
-    \\frac{\\mathrm{VPD}}{p_\\mathrm{atm}}
-```
-
-where
-
-```math
-g_\\mathrm{tot,W} = \\frac{1}{g_\\mathrm{b,W}^{-1} + g_\\mathrm{s,W}^{-1}}
-```
-
-is the total conductance of water vapor [mol m^-2 s^-1].
-
-# Arguments
-
-* `pressure`: Ambient pressure [Pa].
-* `vpd_leaf`: Leaf-to-air vapor pressure deficit [Pa].
-* `g_bw`: Boundary layer conductance of water vapor [mol m^-2 s^-1].
-* `g_sw`: Stomatal conductance of water vapor [mol m^-2 s^-1].
-"""
-function transpiration(pressure, vpd_leaf, g_bw, g_sw)
-    total_cond_h2o(g_bw, g_sw) * vpd_leaf / pressure
 end
 
 """

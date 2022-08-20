@@ -6,14 +6,20 @@ DocTestSetup = quote
 end
 ```
 
-## Stomatal conductance
-
-```@autodocs
-Modules = [Canopy.Leaf.StomCond]
-```
-
 ## Energy balance
 
 ```@autodocs
 Modules = [Canopy.Leaf.EnergyBalance]
+```
+
+## Transpiration
+
+```@autodocs
+Modules = [Canopy.Leaf.Transpiration]
+```
+
+## Stomatal conductance
+
+```@autodocs
+Modules = [Canopy.Leaf.StomatalConductance]
 ```

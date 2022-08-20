@@ -1,11 +1,12 @@
 module Leaf
 
-include("stomcond.jl")
+include("stomatal_conductance.jl")
+include("transpiration.jl")
 include("energy_balance.jl")
-# include("photosyn.jl")
 
 # export submodule functions to the current level
-using .StomCond
+using .StomatalConductance
+using .Transpiration
 using .EnergyBalance
 
 end  # module
