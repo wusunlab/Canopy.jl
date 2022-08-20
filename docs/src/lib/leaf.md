@@ -23,3 +23,15 @@ Modules = [Canopy.Leaf.Transpiration]
 ```@autodocs
 Modules = [Canopy.Leaf.StomatalConductance]
 ```
+
+## Photosynthesis
+
+```@autodocs
+Modules = [Canopy.Leaf.Photosynthesis]
+```
+
+## Mesophyll conductance
+
+```@autodocs
+Modules = [Canopy.Leaf.MesophyllConductance]
+```
