@@ -18,8 +18,8 @@ Calculate leaf-to-air vapor pressure deficit [Pa].
 
 # Arguments
 
-* `temp`: Air temperature [K].
-* `temp_leaf`: Leaf temperature [K].
+* `temp`: Air temperature [K];
+* `temp_leaf`: Leaf temperature [K];
 * `rh`: Relative humidity [0--1].
 """
 function leaf_vapor_deficit(temp, temp_leaf, rh)
@@ -38,8 +38,15 @@ stomatal conductances to water vapor, respectively.
 
 # Arguments
 
-* `g_bw`: Leaf boundary layer conductance to water vapor [mol m^-2 s^-1].
+* `g_bw`: Leaf boundary layer conductance to water vapor [mol m^-2 s^-1];
 * `g_sw`: Stomatal conductance to water vapor [mol m^-2 s^-1].
+
+# Examples
+
+```jldoctest
+julia> total_cond_vapor(1.0, 0.25)
+0.2
+```
 """
 total_cond_vapor(g_bw, g_sw) = g_bw * g_sw / (g_bw + g_sw)
 
@@ -59,10 +66,17 @@ where
 
 # Arguments
 
-* `pressure`: Ambient pressure [Pa].
-* `vpd_leaf`: Leaf-to-air vapor pressure deficit [Pa].
-* `g_bw`: Boundary layer conductance of water vapor [mol m^-2 s^-1].
+* `pressure`: Ambient pressure [Pa];
+* `vpd_leaf`: Leaf-to-air vapor pressure deficit [Pa];
+* `g_bw`: Boundary layer conductance of water vapor [mol m^-2 s^-1];
 * `g_sw`: Stomatal conductance of water vapor [mol m^-2 s^-1].
+
+# Examples
+
+```jldoctest
+julia> transpiration(1e5, 5e2, 1.0, 0.25)
+0.001
+```
 """
 function transpiration(pressure, vpd_leaf, g_bw, g_sw)
     total_cond_vapor(g_bw, g_sw) * vpd_leaf / pressure
