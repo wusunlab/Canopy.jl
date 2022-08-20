@@ -7,6 +7,7 @@ tests = [
     "test_constants.jl",
     "test_water.jl",
     "test_radtrans.jl",
+    "test_leaf.jl",
 ]
 
 println("Running tests:")

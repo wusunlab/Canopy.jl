@@ -23,7 +23,7 @@ Calculate leaf-to-air vapor pressure deficit [Pa].
 * `rh`: Relative humidity [0--1].
 """
 function leaf_vapor_deficit(temp, temp_leaf, rh)
-    e_sat(temp_leaf) - e_sat(temp_air) * rh
+    e_sat(temp_leaf) - e_sat(temp) * rh
 end
 
 """
