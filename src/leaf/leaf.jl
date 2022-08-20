@@ -1,11 +1,11 @@
 module Leaf
 
 include("stomcond.jl")
-include("ebal.jl")
+include("energy_balance.jl")
 # include("photosyn.jl")
 
 # export submodule functions to the current level
 using .StomCond
-using .EBal
+using .EnergyBalance
 
 end  # module

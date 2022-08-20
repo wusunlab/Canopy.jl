@@ -6,7 +6,7 @@ Leaf energy balance module.
 * [`PAR_to_shortwave`](@ref)
 * [`sensible_heat`](@ref)
 * [`leaf_vapor_deficit`](@ref)
-* [`water_flux`](@ref)
+* [`transpiration`](@ref)
 * [`latent_heat`](@ref)
 * [`energy_imbalance`](@ref)
 
@@ -14,20 +14,19 @@ Leaf energy balance module.
 
 ## Leaf boundary layer conductances
 
-* [CN98] Campbell, G. S. and Norman, J. M. (1998). *An Introduction to
-  Environmental Biophysics* (2nd ed.), pp. 99--101. Springer Science+Business
-  Media, New York, NY, USA.
-* [B08] Bonan, G. (2008). *Ecological Climatology: Concepts and Applications*,
-  pp. 229--232. Cambridge University Press, Cambridge, UK.
+* Campbell, G. S. & Norman, J. M. (1998). _An Introduction to Environmental
+  Biophysics_ (2nd ed., pp. 99--101). Springer, New York.
+* Bonan, G. (2008). _Ecological Climatology: Concepts and Applications_ (2nd
+  ed., pp. 229--232). Cambridge University Press.
 
 ## Relationship between PAR and shortwave radiation
 
-* [MHH84] Meek, D. W., Hatfield, J. L., Howell, T. A., Idso, S. B., and
-  Reginato, R. J. (1984). A generalized relationship between photosynthetically
-  active radiation and solar radiation. *Agron. J.*, 76(6), 939--945.
+* Meek, D. W., Hatfield, J. L., Howell, T. A., Idso, S. B., & Reginato, R. J.
+  (1984). A generalized relationship between photosynthetically active
+  radiation and solar radiation. _Agronomy Journal_, 76(6), 939--945.
   <https://doi.org/10.2134/agronj1984.00021962007600060018x>
 """
-module EBal
+module EnergyBalance
 
 include("../docstring_style.jl")
 
@@ -47,7 +46,7 @@ export bl_cond_heat,
     PAR_to_shortwave,
     sensible_heat,
     leaf_vapor_deficit,
-    water_flux,
+    transpiration,
     latent_heat,
     energy_imbalance
 
@@ -56,23 +55,22 @@ Calculate leaf boundary layer conductance for heat transfer
 (``g_\\mathrm{b,H}``) [mol m^-2 s^-1].
 
 ```math
-g_\\mathrm{b,H} = \\frac{1.4\\,\\mathrm{Nu}\\cdot \\chi_\\mathrm{a}\\cdot
-    D_\\mathrm{H}}{d}
+g_\\mathrm{b,H}
+= \\frac{1.4\\,\\mathrm{Nu}\\cdot \\chi_\\mathrm{a}\\cdot D_\\mathrm{H}}{d}
 ```
 
 where
 
 * Nu = 0.664 Re``^{1/2}`` Pr``^{1/3}`` is the Nusselt number;
 * ``\\chi_\\mathrm{a}`` [mol m^-3] is the molar concentration of air;
-* ``D_\\mathrm{H}`` [m^2 s^-1] is the thermal diffusivity of air.
-
-The multiplier 1.4 is a correction factor for leaves in field conditions.
+* ``D_\\mathrm{H}`` [m^2 s^-1] is the thermal diffusivity of air;
+* The multiplier 1.4 is a correction factor for leaves in field conditions.
 
 # Arguments
 
-* `temp`: Air temperature [K].
 * `pressure`: Ambient pressure [Pa].
-* `RH`: Relative humidity [0--1].
+* `temp`: Air temperature [K].
+* `rh`: Relative humidity [0--1].
 * `wind_speed`: Wind speed [m s^-1].
 * `d_leaf`: Characteristic leaf size [m].
 
@@ -80,16 +78,19 @@ The multiplier 1.4 is a correction factor for leaves in field conditions.
 
 [`bl_cond_vapor`](@ref)
 """
-function bl_cond_heat(temp, pressure, RH, wind_speed, d_leaf)
+function bl_cond_heat(pressure, temp, rh, wind_speed, d_leaf)
     # kinematic viscosity of moist air [m^2 s^-1]
-    nu_a = dyn_visc_moistair(temp, pressure, RH) /
-        air_density(temp, pressure, RH)
-    Pr = prandtl(temp, pressure, RH)
+    nu_a =
+        dyn_visc_moistair(temp, pressure, rh) / air_density(temp, pressure, rh)
+    Pr = prandtl(temp, pressure, rh)
     air_conc = air_molar(temp, pressure)  # [mol m^-3]
 
-    return 1.4 * 0.664 * cbrt(Pr) * air_conc *
-        therm_diff_moistair(temp, pressure, RH) *
-        sqrt(wind_speed / (d_leaf * nu_a))
+    return 1.4 *
+           0.664 *
+           cbrt(Pr) *
+           air_conc *
+           therm_diff_moistair(temp, pressure, rh) *
+           sqrt(wind_speed / (d_leaf * nu_a))
 end
 
 """
@@ -97,8 +98,9 @@ Calculate leaf boundary layer conductance for water vapor transfer
 (``g_\\mathrm{b,W}``).
 
 ```math
-g_\\mathrm{b,W} = \\frac{1.4\\cdot 0.664\\ \\mathrm{Re}^{1/2}\\
-    \\mathrm{Sc}^{1/3} \\cdot \\chi_\\mathrm{a} \\cdot D_\\mathrm{W}}{d}
+g_\\mathrm{b,W}
+= \\frac{1.4\\cdot 0.664\\ \\mathrm{Re}^{1/2}\\
+\\mathrm{Sc}^{1/3} \\cdot \\chi_\\mathrm{a} \\cdot D_\\mathrm{W}}{d}
 ```
 
 where
@@ -106,15 +108,14 @@ where
 * ``\\mathrm{Sc} = \\nu_\\mathrm{a} / D_\\mathrm{W}`` is the Schmidt number;
 * ``\\nu_\\mathrm{a}`` [m^2 s^-1] is the kinematic viscosity of air;
 * ``D_\\mathrm{W}`` [m^2 s^-1] is the diffusivity of water vapor in air;
-* ``\\chi_\\mathrm{a}`` [mol m^-3] is the molar concentration of air.
-
-The multiplier 1.4 is a correction factor for leaves in field conditions.
+* ``\\chi_\\mathrm{a}`` [mol m^-3] is the molar concentration of air;
+* The multiplier 1.4 is a correction factor for leaves in field conditions.
 
 # Arguments
 
-* `temp`: Air temperature [K].
 * `pressure`: Ambient pressure [Pa].
-* `RH`: Relative humidity [0--1].
+* `temp`: Air temperature [K].
+* `rh`: Relative humidity [0--1].
 * `wind_speed`: Wind speed [m s^-1].
 * `d_leaf`: Characteristic leaf size [m].
 
@@ -122,16 +123,20 @@ The multiplier 1.4 is a correction factor for leaves in field conditions.
 
 [`bl_cond_heat`](@ref)
 """
-function bl_cond_vapor(temp, pressure, RH, wind_speed, d_leaf)
+function bl_cond_vapor(pressure, temp, rh, wind_speed, d_leaf)
     # kinematic viscosity of moist air [m^2 s^-1]
-    nu_a = dyn_visc_moistair(temp, pressure, RH) /
-        air_density(temp, pressure, RH)
+    nu_a =
+        dyn_visc_moistair(temp, pressure, rh) / air_density(temp, pressure, rh)
     D_w = diffus_air("h2o", temp, pressure)
     Sc = nu_a / D_w  # Schmidt number
     air_conc = air_molar(temp, pressure)  # [mol m^-3]
 
-    return 1.4 * 0.664 * cbrt(Sc) * air_conc * D_w *
-        sqrt(wind_speed / (d_leaf * nu_a))
+    return 1.4 *
+           0.664 *
+           cbrt(Sc) *
+           air_conc *
+           D_w *
+           sqrt(wind_speed / (d_leaf * nu_a))
 end
 
 """
@@ -154,23 +159,27 @@ Note that both sides of a leaf are taken into account by the factor 2.
 
 # Arguments
 
-* `T_leaf`: Leaf temperature [K].
-* `T_air`: Air temperature [K].
+* `temp`: Air temperature [K].
+* `temp_leaf`: Leaf temperature [K].
 * `cp_a`: Molar heat capacity of the moist air [J K^-1 mol^-1].
 * `g_bh`: Boundary layer conductance for heat transfer [mol m^-2 s^-1].
 """
-sensible_heat(T_leaf, T_air, cp_a, g_bh) = 2. * g_bh * cp_a * (T_leaf - T_air)
+function sensible_heat(temp, temp_leaf, cp_a, g_bh)
+    2.0 * g_bh * cp_a * (temp_leaf - temp)
+end
 
 """
 Calculate leaf-to-air vapor pressure deficit [Pa].
 
 # Arguments
 
-* `T_leaf`: Leaf temperature [K].
-* `T_air`: Air temperature [K].
-* `RH`: Relative humidity [0--1].
+* `temp`: Air temperature [K].
+* `temp_leaf`: Leaf temperature [K].
+* `rh`: Relative humidity [0--1].
 """
-leaf_vapor_deficit(T_leaf, T_air, RH) = e_sat(T_leaf) - e_sat(T_air) * RH
+function leaf_vapor_deficit(temp, temp_leaf, rh)
+    e_sat(temp_leaf) - e_sat(temp_air) * rh
+end
 
 """
 Calculate leaf water flux [mol m^-2 s^-1].
@@ -190,13 +199,14 @@ is the total conductance of water vapor [mol m^-2 s^-1].
 
 # Arguments
 
-* `VPD_leaf`: Leaf-to-air vapor pressure deficit [Pa].
 * `pressure`: Ambient pressure [Pa].
-* `g_sw`: Stomatal conductance of water vapor [mol m^-2 s^-1].
+* `vpd_leaf`: Leaf-to-air vapor pressure deficit [Pa].
 * `g_bw`: Boundary layer conductance of water vapor [mol m^-2 s^-1].
+* `g_sw`: Stomatal conductance of water vapor [mol m^-2 s^-1].
 """
-water_flux(VPD_leaf, pressure, g_sw, g_bw) = total_cond_h2o(g_bw, g_sw) *
-    VPD_leaf / pressure
+function transpiration(pressure, vpd_leaf, g_bw, g_sw)
+    total_cond_h2o(g_bw, g_sw) * vpd_leaf / pressure
+end
 
 """
 Calculate latent heat transfer rate at the leaf surface [W m^-2].
@@ -211,15 +221,15 @@ and ``g_\\mathrm{tot,W}`` is the total conductance of water vapor.
 
 # Arguments
 
-* `T_leaf`: Leaf temperature [K].
-* `VPD_leaf`: Leaf-to-air vapor pressure deficit [Pa].
 * `pressure`: Ambient pressure [Pa].
-* `g_sw`: Stomatal conductance of water vapor [mol m^-2 s^-1].
+* `temp_leaf`: Leaf temperature [K].
+* `vpd_leaf`: Leaf-to-air vapor pressure deficit [Pa].
 * `g_bw`: Boundary layer conductance of water vapor [mol m^-2 s^-1].
+* `g_sw`: Stomatal conductance of water vapor [mol m^-2 s^-1].
 """
-latent_heat(T_leaf, VPD_leaf, pressure, g_sw, g_bw) =
-    water_flux(VPD_leaf, pressure, g_sw, g_bw) *
-    latent_heat_vap(T_leaf)
+function latent_heat(pressure, temp_leaf, vpd_leaf, g_bw, g_sw)
+    transpiration(pressure, vpd_leaf, g_bw, g_sw) * latent_heat_vap(temp_leaf)
+end
 
 """
 Calculate the imbalance of energy transfer at the leaf surface [W m^-2]. This
@@ -227,27 +237,36 @@ function is used as a constraint for the coupled leaf temperature--flux solver.
 
 # Arguments
 
-* `T_leaf`: Leaf temperature [K].
-* `T_air`: Air temperature [K].
 * `pressure`: Ambient pressure [Pa].
-* `RH`: Relative humidity [0--1].
+* `temp`: Air temperature [K].
+* `temp_leaf`: Leaf temperature [K].
+* `rh`: Relative humidity [0--1].
 * `R_sw`: Incoming shortwave radiation [W m^-2].
 * `wind_speed`: Wind speed [m s^-1].
 * `d_leaf`: Characteristic leaf size [m].
 * `em_leaf`: Emissivity of leaf [0--1].
 * `g_sw`: Stomatal conductance of water vapor [mol m^-2 s^-1].
 """
-function energy_imbalance(T_leaf, T_air, pressure, RH, R_sw, wind_speed,
-                          d_leaf, em_leaf, g_sw)
-    R_net = R_sw - em_leaf * stefan_boltzmann(T_leaf)
-    VPD_leaf = leaf_vapor_pressure_deficit(T_leaf, T_air, RH)
-    cp_a = heat_cap_moistair(T_leaf, pressure, RH)
-    g_bh = bl_cond_heat(T_air, pressure, RH, wind_speed, d_leaf)
-    g_bw = bl_cond_vapor(T_air, pressure, RH, wind_speed, d_leaf)
-    SH = sensible_heat(T_leaf, T_air, cp_a, g_bh)
-    LE = latent_heat(T_leaf, VPD_leaf, pressure, g_sw, g_bw)
+function energy_imbalance(
+    pressure,
+    temp,
+    temp_leaf,
+    rh,
+    R_sw,
+    wind_speed,
+    d_leaf,
+    em_leaf,
+    g_sw,
+)
+    R_net = R_sw - em_leaf * stefan_boltzmann(temp_leaf)
+    VPD_leaf = leaf_vapor_deficit(temp, temp_leaf, rh)
+    cp_a = heat_cap_moistair(temp_leaf, pressure, RH)
+    g_bh = bl_cond_heat(pressure, temp, rh, wind_speed, d_leaf)
+    g_bw = bl_cond_vapor(pressure, temp, rh, wind_speed, d_leaf)
+    SH = sensible_heat(temp, temp_leaf, cp_a, g_bh)
+    LE = latent_heat(pressure, temp_leaf, vpd_leaf, g_bw, g_sw)
 
-    return R_net - SH - LE
+    R_net - SH - LE
 end
 
 end  # module
