@@ -17,5 +17,11 @@ Private = false
 ## Reactions
 
 ```@autodocs
-Modules = [Canopy.PhysChem.Rxn]
+Modules = [Canopy.PhysChem.Reactions]
+```
+
+## Solubility
+
+```@autodocs
+Modules = [Canopy.PhysChem.Solub]
 ```

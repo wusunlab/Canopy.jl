@@ -15,5 +15,5 @@ Modules = [Canopy.Leaf.StomCond]
 ## Energy balance
 
 ```@autodocs
-Modules = [Canopy.Leaf.EBal]
+Modules = [Canopy.Leaf.EnergyBalance]
 ```
